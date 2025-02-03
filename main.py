@@ -44,7 +44,6 @@ def plot_graph(users, drivers, polo):
     plt.ylabel("Asse Y")
     plt.grid(True)
     plt.title("Visualizzazione di punti nel piano cartesiano")
-    plt.legend()
 
     # Mostra il grafico
     plt.show()
@@ -108,7 +107,6 @@ def plot_all(tracks, users, drivers, polo):
     axs[0].set_xlabel("Asse X")
     axs[0].set_ylabel("Asse Y")
     axs[0].grid(True)
-    axs[0].legend()
 
     # grafico 2
     for track in tracks:
@@ -134,7 +132,6 @@ def plot_all(tracks, users, drivers, polo):
     axs[1].set_xlabel("Asse X")
     axs[1].set_ylabel("Asse Y")
     axs[1].grid(True)
-    axs[1].legend()
 
     # Mostra il grafico
     plt.show()
@@ -168,9 +165,7 @@ def get_nn(driver, users):
 
 def your_greedy(users, drivers, polo):
   # matrice di 5 colonne e n righe, dove n è il numero di driver
-
   tracks = [[[0,0] for i in range(6)] for j in range(len(drivers))]
-  print(type(tracks))
   
   for j in range(5):
     for i in range(len(drivers)):
@@ -183,7 +178,6 @@ def your_greedy(users, drivers, polo):
   for user in users:
     tracks.extend([[user, polo]])
 
-  print(tracks)
   return tracks
 
 def funzione_obiettivo(tracks):
@@ -205,6 +199,5 @@ tracks = your_greedy(users1, drivers1, polo1)
 print(f"USERS: ", users1)
 print(f"DRIVERS: ", drivers1)
 plot_graph(users, drivers, polo)
-print(tracks)
 plot_all(tracks, users, drivers, polo)
-print(f"Funzione Obiettivo", funzione_obiettivo(tracks, users1))
+print(f"Funzione Obiettivo", funzione_obiettivo(tracks))
