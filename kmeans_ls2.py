@@ -18,7 +18,7 @@ def get_nn(driver, cusers):
     return nn, min_dist
     
 
-def kmeans(users, drivers, polo):
+def kmeans2(users, drivers, polo):
     # Applichiamo K-Means con n. driver clusters
     kmeans = KMeans(n_clusters=len(drivers), n_init=1, init=np.array(drivers))
     # fit di kmeans su users e drivers
@@ -36,7 +36,7 @@ def kmeans(users, drivers, polo):
         indices = np.where(y_kmeans == cluster)[0]
         cluster_users = [users[i] for i in indices]
         tracks.append([drivers[cluster]])
-
+        
         for i in range(min(max_elements_per_cluster, len(cluster_users))):
             nn, _ = get_nn(drivers[cluster], cluster_users)
             tracks[cluster].append(nn)
