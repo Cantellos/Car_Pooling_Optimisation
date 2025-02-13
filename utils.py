@@ -48,7 +48,7 @@ def plot_graph(users, drivers, polo):
     # Mostra il grafico
     plt.show()
 
-def plot_all(tracks, users, drivers, polo):
+def plot_all(tracks, users, drivers, polo, map_size):
     # due grafici affiancati
     fig, axs = plt.subplots(1, 2, figsize=(16, 8))
 
@@ -67,8 +67,8 @@ def plot_all(tracks, users, drivers, polo):
     axs[0].axvline(0, color='black', linewidth=1)  # Asse Y
 
     # Imposta i limiti fissi per gli assi
-    axs[0].set_xlim(-25, 25)
-    axs[0].set_ylim(-25, 25)
+    axs[0].set_xlim(-map_size/2, map_size/2)
+    axs[0].set_ylim(-map_size/2, map_size/2)
     
     # Aggiungi etichette e griglia
     axs[0].set_xlabel("Asse X")
@@ -93,8 +93,8 @@ def plot_all(tracks, users, drivers, polo):
     axs[1].axvline(0, color='black', linewidth=1)  # Asse Y
 
     # Imposta i limiti fissi per gli assi
-    axs[1].set_xlim(-25, 25)
-    axs[1].set_ylim(-25, 25)
+    axs[1].set_xlim(-map_size/2, map_size/2)
+    axs[1].set_ylim(-map_size/2, map_size/2)
 
     # Aggiungi etichette e griglia
     axs[1].set_xlabel("Asse X")

@@ -69,7 +69,7 @@ def kmeans(users, drivers, polo):
 
     # aggiungiamo gli users che non sono stati assegnati
     for i in range(len(X)):
-        if y_kmeans[i] == 3:
+        if y_kmeans[i] == len(drivers):
             tracks.append([X[i].tolist(), polo])
     
     return tracks
