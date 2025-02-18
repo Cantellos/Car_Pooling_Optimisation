@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
+# PRENDE I 4 VICINI PIU' VICINI DI UN DRIVER
+
 def get_4nn(driver, cusers):
     # trova i 4 vicini più vicini
     min_dist = 1000000

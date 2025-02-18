@@ -5,6 +5,8 @@ from sklearn.cluster import KMeans
 
 # TODO: Randomizzare l'ordine dei driver nel kmeans per evitare che il primo driver abbia sempre i migliori vicini
 
+# PRENDE IL PIù VICINO, POI SI POSTA Lì E PRENDE A SUA VOLTA IL PIù VICINO AD ESSO
+
 def get_nn(driver, cusers):
     # trova il vicino più vicino
     min_dist = 1000000
