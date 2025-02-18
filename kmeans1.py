@@ -24,7 +24,7 @@ def get_4nn(driver, cusers):
     
 # TODO: Randomizzare l'ordine dei driver nel kmeans per evitare che il primo driver abbia sempre i migliori vicini
 
-def kmeans(users, drivers, polo):
+def kmeans1(users, drivers, polo):
     # Applichiamo K-Means con n. driver clusters
     kmeans = KMeans(n_clusters=len(drivers), n_init=1, init=np.array(drivers))
     # fit di kmeans su users e drivers

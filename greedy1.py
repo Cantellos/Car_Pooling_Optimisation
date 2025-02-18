@@ -17,7 +17,7 @@ def get_nn(driver, users):
 # 2 - Distanza Polo-Neighbour
 # 3 - Distanza Neighbour + Distanza Polo-Neighbour + Distanza Polo
 
-def your_greedy(users, drivers, polo):
+def greedy1(users, drivers, polo):
   # matrice di 5 colonne e n righe, dove n è il numero di driver
   tracks = [[[0,0] for i in range(6)] for j in range(len(drivers))]
   

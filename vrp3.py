@@ -4,7 +4,8 @@ from sklearn.cluster import KMeans
 from utils import distanza, funzione_obiettivo
 import random
 
-# Parallelizzata la ricerca del NN di tutti i driver
+# Ricerca sequenziale del NN di tutti i driver
+
 
 def get_nn(driver, cusers, polo):
     # trova il vicino più vicino
@@ -19,12 +20,12 @@ def get_nn(driver, cusers, polo):
             nn = p
     return nn, min_dist
 
-def vrp1(users, drivers, polo):
+def vrp3(users, drivers, polo):
     # Randomizzo l'ordine dei driver per 10 volte e tengo il risultato migliore
     best_tracks = []
     best_fo = 1000000
 
-    for i in range(2):
+    for i in range(200):
         users_c = users.copy()
         drivers_c = drivers.copy()
         # Randomizzo l'ordine dei driver
@@ -32,26 +33,19 @@ def vrp1(users, drivers, polo):
         
         tracks = [0 for _ in range(len(drivers_c))]
 
-        for i in range(5):
-            print("Iterazione", i)
-            for j in range(len(drivers_c)):
-                print("Autista", j,"Valore: ", drivers_c[j])
-                if i == 0:
-                    tracks[j] = [drivers_c[j]]
-                else:
-                    nn, _ = get_nn(drivers_c[j], users_c, polo)
-                    tracks[j].append(nn)
-                    users_c.remove(nn)
-                    drivers_c[j] = nn
-
-        for j in range(len(drivers_c)):
-            tracks[j].append(polo)
+        for i in range(len(drivers_c)):
+            tracks[i] = [drivers_c[i]]
+            
+            for j in range(4): # Itero per ogni passeggero
+                nn, _ = get_nn(drivers_c[i], users_c, polo)
+                tracks[i].append(nn)
+                users_c.remove(nn)
+                drivers_c[i] = nn
+            tracks[i].append(polo)
 
         # aggiungiamo gli users che non sono stati assegnati
         for exc in users_c:
             tracks.append([exc, polo])
-
-        print(funzione_obiettivo(tracks))
         
         if funzione_obiettivo(tracks) < best_fo:
             best_fo = funzione_obiettivo(tracks)
