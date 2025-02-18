@@ -106,6 +106,75 @@ def plot_all(title, tracks, users, drivers, polo, map_size):
     # Mostra il grafico
     plt.show()
 
+def plot_total(users, drivers, polo, map_size, tracks_all):
+    # numero di righe e 3 colonne pari al numero di grafici da visualizzare (tranne il primo)
+    rows = (int)((len(tracks_all)+1)/3)
+    cols = 3
+
+    fig, axs = plt.subplots(rows, cols, figsize=(20, 12))
+
+    fig.suptitle("Risultati ottenuti")
+
+    # grafico 1
+    xu, yu = zip(*users)
+
+    axs[0][0].set_title("Istanza generata")
+
+    axs[0][0].scatter(xu, yu, color='green', marker='o')
+
+    xd, yd = zip(*drivers)
+    axs[0][0].scatter(xd, yd, color='blue', marker='o')
+    
+    axs[0][0].scatter(polo[0], polo[1], color='red', marker='o')
+
+    # Aggiungi assi cartesiani centrati in (0,0)
+    axs[0][0].axhline(0, color='black', linewidth=1)  # Asse X
+    axs[0][0].axvline(0, color='black', linewidth=1)  # Asse Y
+
+    # Imposta i limiti fissi per gli assi
+    axs[0][0].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+    axs[0][0].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+    
+    # Aggiungi etichette e griglia
+    axs[0][0].set_xlabel("Asse X")
+    axs[0][0].set_ylabel("Asse Y")
+    axs[0][0].grid(True)
+
+    titles, tracks_list = zip(*tracks_all)
+
+    for i, tracks in enumerate(tracks_list):
+        pos_x = (int)((i+1)/cols)
+        pos_y = (int)((i+1)%cols)
+
+        axs[pos_x][pos_y].set_title(titles[i])
+
+        for track in tracks:
+            x, y = zip(*track)
+            axs[pos_x][pos_y].plot(x, y, marker='o')
+        axs[pos_x][pos_y].scatter(xu, yu, color='green', marker='o')
+
+        xd, yd = zip(*drivers)
+        axs[pos_x][pos_y].scatter(xd, yd, color='blue', marker='o')
+
+        axs[pos_x][pos_y].scatter(polo[0], polo[1], color='red', marker='o')
+
+        # Aggiungi assi cartesiani centrati in (0,0)
+        axs[pos_x][pos_y].axhline(0, color='black', linewidth=1)  # Asse X
+        axs[pos_x][pos_y].axvline(0, color='black', linewidth=1)  # Asse Y
+
+        # Imposta i limiti fissi per gli assi
+        axs[pos_x][pos_y].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+        axs[pos_x][pos_y].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+
+        # Aggiungi etichette e griglia
+        axs[pos_x][pos_y].set_xlabel("Asse X")
+        axs[pos_x][pos_y].set_ylabel("Asse Y")
+        axs[pos_x][pos_y].grid(True)
+
+    # Mostra il grafico
+    plt.show()
+   
+
 def distanza(p1, p2):
     # Distanza Euclidea
     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
