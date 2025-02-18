@@ -1,73 +1,60 @@
-import os
-#os.environ['OMP_NUM_THREADS'] = '4'
-import matplotlib.pyplot as plt
-import numpy as np
 from greedy1 import greedy1
-from kmeans1 import kmeans1
-from kmeans2 import kmeans2
-from kmeans3 import kmeans3
 from kmeans4 import kmeans4
-from vrp1 import vrp1
-from vrp2 import vrp2
 from vrp3 import vrp3
 from ls1 import ls1
-from utils import generatore, plot_graph, plot_all, funzione_obiettivo
+from utils import generatore, plot_all, funzione_obiettivo
 
+# Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
+istanza = 1
 
-# Piccola istanza
-tot_users_p = 20
-n_drivers_p = 3
-map_size_p = 50
+if istanza == 1:
+    # Piccola istanza
+    tot_users = 20
+    n_drivers = 3
+    map_size = 50
+elif istanza == 2:
+    # Media istanza
+    tot_users = 50
+    n_drivers = 8
+    map_size = 100
+elif istanza == 3:
+    # Grande istanza
+    tot_users = 100
+    n_drivers = 18
+    map_size = 200
 
-# Media istanza
-tot_users_m = 50
-n_drivers_m = 8
-map_size_m = 100
-
-# Grande istanza
-tot_users_g = 100
-n_drivers_g = 18
-map_size_g = 200
-
-seed = None
-
-# Seleziona l'istanza da utilizzare
-tot_users = tot_users_m
-n_drivers = n_drivers_m
-map_size = map_size_m
+seed = 2 # Seed istanza da utilizzare (None = random)
 
 # Generazione delle istanze
-#users, drivers, polo = generatore(tot_users_p, n_drivers_p, map_size_p, seed) # Piccola istanza
-users, drivers, polo = generatore(tot_users, n_drivers, map_size, seed) # Media istanza
-#users, drivers, polo = generatore(tot_users_g, n_drivers_g, map_size_g, seed) # Grande istanza
+users, drivers, polo = generatore(tot_users, n_drivers, map_size, seed)
 
+# Copia delle istanze originali
+k = 6 # Numero di algoritmi da eseguire
+users_list = [users.copy() for _ in range(k)]
+drivers_list = [drivers.copy() for _ in range(k)]
+polo_list = [polo.copy() for _ in range(k)]
 
-# Memorizzazione delle istanze originali
-users3, users4, users5 = users.copy(), users.copy(), users.copy()
-drivers3, drivers4, drivers5 = drivers.copy(), drivers.copy(), drivers.copy()
-polo3, polo4, polo5 = polo.copy(), polo.copy(), polo.copy()
+# Salvataggio nelle variabili utilizzate dagli algoritmi
+users1, users2, users3, users4, users5, users6 = users_list
+drivers1, drivers2, drivers3, drivers4, drivers5, drivers6 = drivers_list
+polo1, polo2, polo3, polo4, polo5, polo6 = polo_list
 
-users6 = users.copy()
-drivers6 = drivers.copy()
-polo6 = polo.copy()
+# Esecuzione degli algoritmi (FO: = Funzione Obiettivo relativa a istanza con seed=2)
+# Greedy
+# tracks1 = greedy1(users1, drivers1, polo1) #FO: 269.9
+# K-Means
+# tracks2 = kmeans4(users2, drivers2, polo2) # FO: 257.7
+# VRP
+tracks3 = vrp3(users3, drivers3, polo3) # FO: 254.1
+# Local Search
+tracks4 = ls1(users4, drivers4, polo4, tracks3) # FO: 244.7
 
-# Esecuzione degli algoritmi
+# print(f"Funzione Obiettivo Greedy ", funzione_obiettivo(tracks1))
+# print(f"Funzione Obiettivo Kmeans ", funzione_obiettivo(tracks2))
+print(f"Funzione Obiettivo VRP3", funzione_obiettivo(tracks3))
+print(f"Funzione Obiettivo LS1", funzione_obiettivo(tracks4))
 
-# tracks_greedy = your_greedy(users1, drivers1, polo1) #FO: 269.9
-tracks1 = kmeans1(users4, drivers4, polo4) # FO: 298.3
-# tracks2 = kmeans2(users2, drivers2, polo2) # FO: 261.2
-# tracks3 = kmeans3(users3, drivers3, polo3) # FO: 261.2
-# tracks4 = kmeans4(users4, drivers4, polo4) # FO: 257.7
-# tracks6 = vrp3(users5, drivers5, polo5) # FO: 254.1
-tracks7 = ls1(users5, drivers5, polo5, tracks1) # FO: 254.1
-
-#print(f"Funzione Obiettivo Kmeans 1", funzione_obiettivo(tracks))
-#print(f"Funzione Obiettivo Kmeans 3", funzione_obiettivo(tracks3))
-#print(f"Funzione Obiettivo Kmeans 4", funzione_obiettivo(tracks4))
-print(f"Funzione Obiettivo VRP3", funzione_obiettivo(tracks1))
-print(f"Funzione Obiettivo LS1", funzione_obiettivo(tracks7))
-
-#plot_all("K-Means 3", tracks3, users, drivers, polo, map_size)
-#plot_all("K-Means 4", tracks4, users, drivers, polo, map_size)
-plot_all("VRP3", tracks1, users, drivers, polo, map_size)
-plot_all("LS1", tracks7, users, drivers, polo, map_size)
+# plot_all("Greedy", tracks1, users, drivers, polo, map_size)
+# plot_all("K-Means", tracks2, users, drivers, polo, map_size)
+plot_all("VRP3", tracks3, users, drivers, polo, map_size)
+plot_all("LS1", tracks4, users, drivers, polo, map_size)
