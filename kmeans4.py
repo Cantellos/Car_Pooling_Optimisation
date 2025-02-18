@@ -67,8 +67,6 @@ def kmeans4(users, drivers, polo):
         for i in range(len(X)):
             if y_kmeans[i] == len(drivers_c):
                 tracks.append([X[i].tolist(), polo])
-
-        print(funzione_obiettivo(tracks))
         
         if funzione_obiettivo(tracks) < best_fo:
             best_fo = funzione_obiettivo(tracks)
