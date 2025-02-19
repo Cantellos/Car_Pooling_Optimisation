@@ -7,7 +7,7 @@ from ls.ls3 import ls3
 from utils import generatore, plot_all, plot_total, funzione_obiettivo
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
-istanza = 4
+istanza = 2
 
 if istanza == 1:
     # Piccola istanza

@@ -146,5 +146,5 @@ def ls3(users, drivers, polo, tracks):
             tracks_c = best_tracks2
         else:
             tracks_c = best_tracks3
-        print("ls3")
+        #print("ls3")
     return tracks_c
