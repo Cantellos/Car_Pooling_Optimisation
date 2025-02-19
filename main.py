@@ -1,4 +1,3 @@
-LOKY_MAX_CPU_COUNT=4 
 from greedy.greedy1 import greedy1
 from kmeans.kmeans4 import kmeans4
 from vrp.vrp3 import vrp3
@@ -8,7 +7,7 @@ from ls.ls3 import ls3
 from utils import generatore, plot_all, plot_total, funzione_obiettivo
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
-istanza = 3
+istanza = 4
 
 if istanza == 1:
     # Piccola istanza
@@ -137,7 +136,6 @@ print(f"Funzione Obiettivo Local Search 3 K-Means: {fo_ls3_kmeans}")
 # plot_all("Greedy", tracks1, users, drivers, polo, map_size)
 # plot_all("K-Means", tracks2, users, drivers, polo, map_size)
 # plot_all("VRP3", tracks3, users, drivers, polo, map_size)
-# 
 
 """
 plot_total(users, drivers, polo, map_size, [("Greedy - FO: " + str(fo_greedy), tracks_greedy),
@@ -164,7 +162,6 @@ plot_total(users, drivers, polo, map_size, [("Greedy - FO: " + str(fo_greedy), t
                                   ("VRP - FO: " + str(fo_vrp), tracks_vrp),
                                   ("LS3 Greedy - FO: " + str(fo_ls3_greedy), tracks_ls3_greedy),
                                   ("LS3 K-Means - FO: " + str(fo_ls3_kmeans), tracks_ls3_kmeans)])
-
 
 """
 plot_all("Greedy", tracks_greedy, users, drivers, polo, map_size)

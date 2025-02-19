@@ -23,7 +23,7 @@ def kmeans4(users, drivers, polo):
     best_tracks = []
     best_fo = 1000000
 
-    for i in range(20):
+    for i in range(50):
         drivers_c = drivers.copy()
         # Randomizzo l'ordine dei driver
         random.shuffle(drivers_c)

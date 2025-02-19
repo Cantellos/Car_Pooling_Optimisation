@@ -7,11 +7,10 @@ def costo(track):
     return c
 
 def ls2(users, drivers, polo, tracks):
-    # Mossa 1: swap user liberi con user in macchina
 
+    # Mossa 1: swap user liberi con user in macchina
     tracks_c = tracks.copy()
     best_tracks = tracks.copy()
-    best_tracks1 = tracks.copy()
     drivers_c = drivers.copy()
 
     improved = True
@@ -66,16 +65,10 @@ def ls2(users, drivers, polo, tracks):
                     exc += 1
 
         excluded = best_excluded.copy()
-        best_tracks1 = best_tracks.copy()
         tracks_c = best_tracks.copy()
         
-    # print("Miglioramenti mossa 1: ", upgrades1)
-    # print(f"Valore funzione obiettivo su best_tracks1: ", funzione_obiettivo(best_tracks1))
-
     # Mossa 2: Swap user di driver diversi
-
     best_tracks = tracks_c.copy()
-    best_tracks2 = tracks_c.copy()
     
     improved = True
     upgrades2 = 0
@@ -113,12 +106,42 @@ def ls2(users, drivers, polo, tracks):
                                 improved = True
                                 upgrades2 += 1
 
-        best_tracks2 = best_tracks.copy()
         tracks_c = best_tracks.copy()
 
-    # print("Miglioramenti mossa 2: ", upgrades2)
-    # print(f"Valore funzione obiettivo su best_tracks2: ", funzione_obiettivo(best_tracks2))
+    # Mossa 3: swap ordine user stessa macchina
+    best_tracks = tracks_c.copy()
+
+    improved = True
+    upgrades3 = 0
+
+    while(improved):
+        best_saving = 0
+        improved = False
+
+        for t in range(len(tracks_c)):
+            for u1 in range(1, len(tracks_c[t])-1):
+                for u2 in range(u1+1, len(tracks_c[t])-1):
+
+                    costo_track_before = costo(tracks_c[t])
+
+                    track1 = tracks_c[t].copy()
+
+                    track1[u1], track1[u2] = track1[u2], track1[u1]
+
+                    costo_track_after = costo(track1)
+
+                    if costo_track_after < costo_track_before:
+                        saving = costo_track_before - costo_track_after
+
+                        if saving > best_saving:
+                            best_saving = saving
+                            best_tracks = tracks_c.copy()
+                            best_tracks.remove(tracks_c[t])
+                            best_tracks.append(track1)
+
+                            improved = True
+                            upgrades3 += 1
+
+        tracks_c = best_tracks.copy()
 
     return tracks_c
-
-    # TODO: Mossa 3: swap ordine user stessa macchina

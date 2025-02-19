@@ -9,20 +9,18 @@ def costo(track):
 def ls1(users, drivers, polo, tracks):
 
     # Mossa 1: swap user liberi con user in macchina
-
     tracks_c = tracks.copy()
     best_tracks = tracks.copy()
     best_tracks1 = tracks.copy()
-    drivers_c = drivers.copy()
+
+    excluded = []
+    best_excluded = []
 
     improved = True
     upgrades1=0
 
-    excluded = []
-    best_excluded = excluded.copy()
-
     for i in range(len(tracks_c)):
-        if tracks_c[i][0] not in drivers_c and len(tracks_c[i])==2:
+        if tracks_c[i][0] not in drivers and len(tracks_c[i])==2:
             excluded.append(tracks_c[i])
 
     while(improved):
@@ -71,11 +69,9 @@ def ls1(users, drivers, polo, tracks):
         tracks_c = best_tracks.copy()  
 
     # Mossa 2: Swap user di driver diversi
-
     tracks_c = tracks.copy()
     best_tracks = tracks.copy()
     best_tracks2 = tracks.copy()
-    drivers_c = drivers.copy()
     
     improved = True
     upgrades2 = 0
@@ -117,7 +113,6 @@ def ls1(users, drivers, polo, tracks):
         tracks_c = best_tracks.copy()
 
     # Mossa 3: swap ordine user stessa macchina
-
     tracks_c = tracks.copy()
     best_tracks = tracks.copy()
     best_tracks3 = tracks.copy()
