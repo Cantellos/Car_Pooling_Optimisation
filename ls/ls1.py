@@ -7,6 +7,7 @@ def costo(track):
     return c
 
 def ls1(users, drivers, polo, tracks):
+
     # Mossa 1: swap user liberi con user in macchina
 
     tracks_c = tracks.copy()
@@ -67,10 +68,7 @@ def ls1(users, drivers, polo, tracks):
 
         excluded = best_excluded.copy()
         best_tracks1 = best_tracks.copy()
-        tracks_c = best_tracks.copy()
-        
-    #print("Miglioramenti mossa 1: ", upgrades1)
-    #print(f"Valore funzione obiettivo su best_tracks1: ", funzione_obiettivo(best_tracks1))
+        tracks_c = best_tracks.copy()  
 
     # Mossa 2: Swap user di driver diversi
 
@@ -85,7 +83,6 @@ def ls1(users, drivers, polo, tracks):
     while(improved):
         best_saving = 0
         improved = False
-        
         
         for ext in range(len(tracks_c)):
             for ins in range(ext+1, len(tracks_c)):
@@ -119,14 +116,49 @@ def ls1(users, drivers, polo, tracks):
         best_tracks2 = best_tracks.copy()
         tracks_c = best_tracks.copy()
 
-    #print("Miglioramenti mossa 2: ", upgrades2)
-    #print(f"Valore funzione obiettivo su best_tracks2: ", funzione_obiettivo(best_tracks2))
+    # Mossa 3: swap ordine user stessa macchina
 
-    if funzione_obiettivo(best_tracks1) <= funzione_obiettivo(best_tracks2):
-        #print("MOSSA 1 EFFETTUTATA")
+    tracks_c = tracks.copy()
+    best_tracks = tracks.copy()
+    best_tracks3 = tracks.copy()
+
+    improved = True
+    upgrades3 = 0
+
+    while(improved):
+        best_saving = 0
+        improved = False
+
+        for t in range(len(tracks_c)):
+            for u1 in range(1, len(tracks_c[t])-1):
+                for u2 in range(u1+1, len(tracks_c[t])-1):
+
+                    costo_track_before = costo(tracks_c[t])
+
+                    track1 = tracks_c[t].copy()
+
+                    track1[u1], track1[u2] = track1[u2], track1[u1]
+
+                    costo_track_after = costo(track1)
+
+                    if costo_track_after < costo_track_before:
+                        saving = costo_track_before - costo_track_after
+
+                        if saving > best_saving:
+                            best_saving = saving
+                            best_tracks = tracks_c.copy()
+                            best_tracks.remove(tracks_c[t])
+                            best_tracks.append(track1)
+
+                            improved = True
+                            upgrades3 += 1
+
+        best_tracks3 = best_tracks.copy()
+        tracks_c = best_tracks.copy()
+
+    if funzione_obiettivo(best_tracks1) <= funzione_obiettivo(best_tracks2) and funzione_obiettivo(best_tracks1) <= funzione_obiettivo(best_tracks3):
         return best_tracks1
-    else: 
-        #print("MOSSA 2 EFFETTUTATA")
+    elif funzione_obiettivo(best_tracks2) <= funzione_obiettivo(best_tracks1) and funzione_obiettivo(best_tracks2) <= funzione_obiettivo(best_tracks3):
         return best_tracks2
-
-    # TODO: Mossa 3: swap ordine user stessa macchina
+    else:
+        return best_tracks3

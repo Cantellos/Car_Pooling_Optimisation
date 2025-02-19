@@ -1,3 +1,4 @@
+LOKY_MAX_CPU_COUNT=4 
 from greedy.greedy1 import greedy1
 from kmeans.kmeans4 import kmeans4
 from vrp.vrp3 import vrp3
@@ -7,7 +8,7 @@ from ls.ls3 import ls3
 from utils import generatore, plot_all, plot_total, funzione_obiettivo
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
-istanza = 4
+istanza = 3
 
 if istanza == 1:
     # Piccola istanza
