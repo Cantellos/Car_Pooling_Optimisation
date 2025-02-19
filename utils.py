@@ -111,7 +111,7 @@ def plot_total(users, drivers, polo, map_size, tracks_all):
     rows = (int)((len(tracks_all)+1)/3)
     cols = 3
 
-    fig, axs = plt.subplots(rows, cols, figsize=(20, 12))
+    fig, axs = plt.subplots(rows, cols, figsize=(18, 10))
 
     fig.suptitle("Risultati ottenuti")
 
@@ -194,4 +194,4 @@ def funzione_obiettivo(tracks):
           lunghezza += distanza(track[i-1], track[i])
       lunghezza_totale += lunghezza
     
-  return lunghezza_totale
+  return round(lunghezza_totale,1)
