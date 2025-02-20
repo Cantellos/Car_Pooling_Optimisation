@@ -36,7 +36,7 @@ def ls3(users, drivers, polo, base):
         best_tracks = tracks_c.copy()
         best_tracks1 = tracks_c.copy()
         upgrades1=0
-        
+
         for t in range(len(tracks_c)):
             for elt in range(1, len(tracks_c[t])-1):
 
@@ -79,7 +79,6 @@ def ls3(users, drivers, polo, base):
         # Mossa 2: Swap user di driver diversi
         best_tracks = tracks_c.copy()
         best_tracks2 = tracks_c.copy()
-
         upgrades2 = 0
 
         for ext in range(len(tracks_c)):
@@ -116,7 +115,6 @@ def ls3(users, drivers, polo, base):
         # Mossa 3: swap ordine user stessa macchina
         best_tracks = tracks_c.copy()
         best_tracks3 = tracks_c.copy()
-
         upgrades3 = 0
 
         for t in range(len(tracks_c)):
@@ -152,5 +150,5 @@ def ls3(users, drivers, polo, base):
             tracks_c = best_tracks2
         else:
             tracks_c = best_tracks3
-            
+          
     return tracks_c

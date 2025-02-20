@@ -1,26 +1,43 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Generatore di istanze casuali
 def generatore (tot_utenti, n_driver, map_size, seed=None):
-  if seed is not None:
-    np.random.seed(seed)
+    if seed is not None:
+        np.random.seed(seed)
 
-  users=[]
-  drivers=[]
+    users=[]
+    drivers=[]
+    polo = [0, 0]
 
-  limit = (int)(map_size/2)
-  for i in range(tot_utenti-n_driver):
-        users.append([np.random.randint(-limit,limit),np.random.randint(-limit,limit)])
-        
-  for i in range(n_driver):
-    drivers.append([np.random.randint(-limit,limit),np.random.randint(-limit,limit)])
-        
-  polo = [0, 0]
+    limit = (int)(map_size/2)
+    for i in range(tot_utenti-n_driver):
+            users.append([np.random.randint(-limit,limit),np.random.randint(-limit,limit)])
+            
+    for i in range(n_driver):
+        drivers.append([np.random.randint(-limit,limit),np.random.randint(-limit,limit)])
 
-  return users, drivers, polo
+    return users, drivers, polo
+
+
+# Distanza Euclidea
+def distanza(p1, p2):
+    return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
+
+
+# Funzione obiettivo = somma lunghezza totale di ogni percorso
+def funzione_obiettivo(tracks):
+    lunghezza_totale = 0
+    for track in tracks:
+        lunghezza = 0
+        for i in range(1, len(track)):
+            lunghezza += distanza(track[i-1], track[i])
+        lunghezza_totale += lunghezza
+
+    return lunghezza_totale
+
 
 def plot_graph(users, drivers, polo):
-
     plt.figure(figsize=(8, 8))
 
     xu, yu = zip(*users)
@@ -47,6 +64,7 @@ def plot_graph(users, drivers, polo):
 
     # Mostra il grafico
     plt.show()
+
 
 def plot_all(title, tracks, users, drivers, polo, map_size):
     # due grafici affiancati
@@ -106,8 +124,9 @@ def plot_all(title, tracks, users, drivers, polo, map_size):
     # Mostra il grafico
     plt.show()
 
+
 def plot_total(users, drivers, polo, map_size, tracks_all):
-    # numero di righe e 3 colonne pari al numero di grafici da visualizzare (tranne il primo)
+    # Numero di righe e 3 colonne pari al numero di grafici da visualizzare (tranne il primo)
     rows = (int)((len(tracks_all)+1)/3)
     cols = 3
 
@@ -115,7 +134,7 @@ def plot_total(users, drivers, polo, map_size, tracks_all):
 
     fig.suptitle("Risultati ottenuti")
 
-    # grafico 1
+    # Grafico 1
     xu, yu = zip(*users)
 
     axs[0][0].set_title("Istanza generata")
@@ -173,25 +192,3 @@ def plot_total(users, drivers, polo, map_size, tracks_all):
 
     # Mostra il grafico
     plt.show()
-   
-
-def distanza(p1, p2):
-    # Distanza Euclidea
-    return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
-    # Distanza Manhattan
-    # return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
-    # Distanza di Chebyshev
-    # return max(abs(p1[0] - p2[0]), abs(p1[1] - p2[1]))
-    # Distanza di Minkowski
-    # return (abs(p1[0] - p2[0]) ** 3 + abs(p1[1] - p2[1]) ** 3) ** (1/3)
-
-def funzione_obiettivo(tracks):
-  # calcola la lunghezza totale per ogni percorso
-  lunghezza_totale = 0
-  for track in tracks:
-      lunghezza = 0
-      for i in range(1, len(track)):
-          lunghezza += distanza(track[i-1], track[i])
-      lunghezza_totale += lunghezza
-    
-  return round(lunghezza_totale,1)

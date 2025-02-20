@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.cluster import KMeans
-from utils import distanza, funzione_obiettivo
+from utils import distanza
 import random
 
 def get_nn(driver, cusers, polo):
@@ -18,7 +18,9 @@ def get_nn(driver, cusers, polo):
 
 def kmeans2(users, drivers, polo):
 
+    # Randomizzo l'ordine dei drivers per aumentare la diversità delle soluzioni
     drivers_c = drivers.copy()
+    random.shuffle(drivers_c)
 
     # Applichiamo K-Means con n. driver clusters
     kmeans = KMeans(n_clusters=len(drivers_c), n_init=1, init=np.array(drivers_c))

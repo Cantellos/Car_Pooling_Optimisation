@@ -1,4 +1,4 @@
-from utils import distanza, funzione_obiettivo
+from utils import distanza
 from greedy.greedy2 import greedy2
 from kmeans.kmeans2 import kmeans2
 

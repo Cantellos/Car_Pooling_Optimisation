@@ -1,11 +1,10 @@
 from utils import distanza
 import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 import random
 
 def get_4nn(driver, cusers):
-    # trova i 4 vicini più vicini
+    # Trova i 4 vicini più vicini
     min_dist = 1000000
 
     nn = [None, None, None, None]
@@ -23,7 +22,9 @@ def get_4nn(driver, cusers):
     
 def kmeans1(users, drivers, polo):
 
+    # Randomizzo l'ordine dei drivers per aumentare la diversità delle soluzioni
     drivers_c = drivers.copy()
+    random.shuffle(drivers_c)
 
     # Applichiamo K-Means con n. driver clusters
     kmeans = KMeans(n_clusters=len(drivers_c), n_init=1, init=np.array(drivers_c))

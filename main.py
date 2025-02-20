@@ -18,21 +18,16 @@ if istanza == 1:
     map_size = 50
 elif istanza == 2:
     # Media istanza
-    tot_users = 50
-    n_drivers = 8
-    map_size = 100
+    tot_users = 60
+    n_drivers = 9
+    map_size = 200
 elif istanza == 3:
     # Grande istanza
-    tot_users = 100
-    n_drivers = 10
-    map_size = 200
-elif istanza == 4:
-    # GIGA istanza
-    tot_users = 1000
-    n_drivers = 150
+    tot_users = 300
+    n_drivers = 50
     map_size = 500
 
-seed = 1 # Seed istanza da utilizzare (None = random)
+seed = None # Seed istanza da utilizzare (None = random)
 
 # Generazione delle istanze
 users, drivers, polo = generatore(tot_users, n_drivers, map_size, seed)
@@ -45,7 +40,7 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Greedy
 tracks_greedy1 = greedy1(users1, drivers1, polo1)
 # Calcolo della funzione obiettivo
-fo_greedy1 = funzione_obiettivo(tracks_greedy1)
+fo_greedy1 = round(funzione_obiettivo(tracks_greedy1), 1)
 print(f"Funzione Obiettivo Greedy 1: {fo_greedy1}")
 
 #plot_all("Greedy 1", tracks_greedy1, users, drivers, polo, map_size)
@@ -58,7 +53,7 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Greedy
 tracks_greedy2 = greedy2(users1, drivers1, polo1)
 # Calcolo della funzione obiettivo
-fo_greedy2 = funzione_obiettivo(tracks_greedy2)
+fo_greedy2 = round(funzione_obiettivo(tracks_greedy2), 1)
 print(f"Funzione Obiettivo Greedy 2: {fo_greedy2}")
 
 #plot_all("Greedy 2", tracks_greedy2, users, drivers, polo, map_size)
@@ -71,7 +66,7 @@ polo1 = polo.copy()
 #Esecuzione algoritmo K-Means
 tracks_kmeans1 = kmeans1(users1, drivers1, polo1)
 # Calcolo della funzione obiettivo
-fo_kmeans1 = funzione_obiettivo(tracks_kmeans1)
+fo_kmeans1 = round(funzione_obiettivo(tracks_kmeans1), 1)
 print(f"Funzione Obiettivo K-Means 1: {fo_kmeans1}")
 
 #plot_all("K-Means 1", tracks_kmeans1, users, drivers, polo, map_size)
@@ -84,7 +79,7 @@ polo1 = polo.copy()
 #Esecuzione algoritmo K-Means
 tracks_kmeans2 = kmeans2(users1, drivers1, polo1)
 # Calcolo della funzione obiettivo
-fo_kmeans2 = funzione_obiettivo(tracks_kmeans2)
+fo_kmeans2 = round(funzione_obiettivo(tracks_kmeans2), 1)
 print(f"Funzione Obiettivo K-Means 2: {fo_kmeans2}")
 
 #plot_all("K-Means 2", tracks_kmeans2, users, drivers, polo, map_size)
@@ -97,7 +92,7 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con Greedy
 tracks_ls1_greedy = ls1(users1, drivers1, polo1, "greedy")
 # Calcolo della funzione obiettivo
-fo_ls1_greedy = funzione_obiettivo(tracks_ls1_greedy)
+fo_ls1_greedy = round(funzione_obiettivo(tracks_ls1_greedy), 1)
 print(f"Funzione Obiettivo Local Search 1 Greedy: {fo_ls1_greedy}")
 
 #plot_all("Local Search 1 Greedy", tracks_ls1_greedy, users, drivers, polo, map_size)
@@ -110,7 +105,7 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con VRP
 tracks_ls1_kmeans = ls1(users1, drivers1, polo1, "kmeans")
 # Calcolo della funzione obiettivo
-fo_ls1_kmeans = funzione_obiettivo(tracks_ls1_kmeans)
+fo_ls1_kmeans = round(funzione_obiettivo(tracks_ls1_kmeans), 1)
 print(f"Funzione Obiettivo Local Search 1 K-Means: {fo_ls1_kmeans}")
 
 #plot_all("Local Search 1 K-Means", tracks_ls1_kmeans, users, drivers, polo, map_size)
@@ -123,7 +118,7 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con Greedy
 tracks_ls2_greedy = ls2(users1, drivers1, polo1, "greedy")
 # Calcolo della funzione obiettivo
-fo_ls2_greedy = funzione_obiettivo(tracks_ls2_greedy)
+fo_ls2_greedy = round(funzione_obiettivo(tracks_ls2_greedy), 1)
 print(f"Funzione Obiettivo Local Search 2 Greedy: {fo_ls2_greedy}")
 
 #plot_all("Local Search 2 Greedy", tracks_ls2_greedy, users, drivers, polo, map_size)
@@ -136,7 +131,7 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con VRP
 tracks_ls2_kmeans = ls2(users1, drivers1, polo1, "kmeans")
 # Calcolo della funzione obiettivo
-fo_ls2_kmeans = funzione_obiettivo(tracks_ls2_kmeans)
+fo_ls2_kmeans = round(funzione_obiettivo(tracks_ls2_kmeans), 1)
 print(f"Funzione Obiettivo Local Search 2 K-Means: {fo_ls2_kmeans}")
 
 #plot_all("Local Search 2 K-Means", tracks_ls2_kmeans, users, drivers, polo, map_size)
@@ -149,7 +144,7 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con Greedy
 tracks_ls3_greedy = ls3(users1, drivers1, polo1, "greedy")
 # Calcolo della funzione obiettivo
-fo_ls3_greedy = funzione_obiettivo(tracks_ls3_greedy)
+fo_ls3_greedy = round(funzione_obiettivo(tracks_ls3_greedy), 1)
 print(f"Funzione Obiettivo Local Search 3 Greedy: {fo_ls3_greedy}")
 
 #plot_all("Local Search 3 Greedy", tracks_ls3_greedy, users, drivers, polo, map_size)
@@ -162,7 +157,7 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con VRP
 tracks_ls3_kmeans = ls3(users1, drivers1, polo1, "kmeans")
 # Calcolo della funzione obiettivo
-fo_ls3_kmeans = funzione_obiettivo(tracks_ls3_kmeans)
+fo_ls3_kmeans = round(funzione_obiettivo(tracks_ls3_kmeans), 1)
 print(f"Funzione Obiettivo Local Search 3 K-Means: {fo_ls3_kmeans}")
 
 #plot_all("Local Search 3 K-Means", tracks_ls3_kmeans, users, drivers, polo, map_size)
@@ -175,10 +170,10 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con VRP
 tracks_msls_greedy = msls(users1, drivers1, polo1, "greedy", 10)
 # Calcolo della funzione obiettivo
-fo_msls_greedy = funzione_obiettivo(tracks_msls_greedy)
+fo_msls_greedy = round(funzione_obiettivo(tracks_msls_greedy), 1)
 print(f"Funzione Obiettivo Multi Start Local Search Greedy: {fo_msls_greedy}")
 
-plot_all("Multi Start Local Search - Greedy", tracks_msls_greedy, users, drivers, polo, map_size)
+#plot_all("Multi Start Local Search - Greedy", tracks_msls_greedy, users, drivers, polo, map_size)
 
 # MULTI START LOCAL SEARCH - K-MEANS
 # Copia delle istanze originali
@@ -188,10 +183,10 @@ polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con VRP
 tracks_msls_kmeans = msls(users1, drivers1, polo1, "kmeans", 10)
 # Calcolo della funzione obiettivo
-fo_msls_kmeans = funzione_obiettivo(tracks_msls_kmeans)
+fo_msls_kmeans = round(funzione_obiettivo(tracks_msls_kmeans), 1)
 print(f"Funzione Obiettivo Multi Start Local Search K-Means: {fo_msls_kmeans}")
 
-plot_all("Multi Start Local Search - K-Means", tracks_msls_kmeans, users, drivers, polo, map_size)
+#plot_all("Multi Start Local Search - K-Means", tracks_msls_kmeans, users, drivers, polo, map_size)
 
 
 """
