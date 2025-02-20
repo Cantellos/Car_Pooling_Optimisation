@@ -192,3 +192,117 @@ def plot_total(users, drivers, polo, map_size, tracks_all):
 
     # Mostra il grafico
     plt.show()
+
+def plot_2(users, drivers, polo, map_size, title, title1, tracks1, title2, tracks2):
+    fig, axs = plt.subplots(1, 2, figsize=(16, 7))
+
+    fig.suptitle(title)
+
+    for track in tracks1:
+        x, y = zip(*track)
+        # plot di un percorso
+        axs[0].plot(x, y, marker='o')
+
+    axs[0].scatter(polo[0], polo[1], color='red', marker='o')
+
+    # Aggiungi assi cartesiani centrati in (0,0)
+    axs[0].axhline(0, color='black', linewidth=1)  # Asse X
+    axs[0].axvline(0, color='black', linewidth=1)  # Asse Y
+
+    # Imposta i limiti fissi per gli assi
+    axs[0].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+    axs[0].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+
+    # Aggiungi titolo, etichette e griglia
+    axs[0].set_title(title1)
+    axs[0].set_xlabel("Asse X")
+    axs[0].set_ylabel("Asse Y")
+    axs[0].grid(True)
+
+
+    for track in tracks2:
+        x, y = zip(*track)
+        # plot di un percorso
+        axs[1].plot(x, y, marker='o')
+
+    axs[1].scatter(polo[0], polo[1], color='red', marker='o')
+
+    # Aggiungi assi cartesiani centrati in (0,0)
+    axs[1].axhline(0, color='black', linewidth=1)  # Asse X
+    axs[1].axvline(0, color='black', linewidth=1)  # Asse Y
+
+    # Imposta i limiti fissi per gli assi
+    axs[1].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+    axs[1].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+
+    # Aggiungi etichette e griglia
+    axs[1].set_xlabel("Asse X")
+    axs[1].set_ylabel("Asse Y")
+    axs[1].set_title(title2)
+    axs[1].grid(True)
+
+    # Mostra il grafico
+    plt.show()
+
+def plot_2_2(users, drivers, polo, map_size, title, tracks_row, tracks_col):
+    fig, axs = plt.subplots(2, 2, figsize=(16, 14))
+
+    fig.suptitle(title)
+
+    titlesR, tracksR = zip(*tracks_row)
+
+    for i, tracksR in enumerate(tracksR):
+        axs[0][i].set_title(titlesR[i])
+
+        for track in tracksR:
+            x, y = zip(*track)
+            axs[0][i].plot(x, y, marker='o')
+
+        xd, yd = zip(*drivers)
+        axs[0][i].scatter(xd, yd, color='blue', marker='o')
+
+        axs[0][i].scatter(polo[0], polo[1], color='red', marker='o')
+
+        # Aggiungi assi cartesiani centrati in (0,0)
+        axs[0][i].axhline(0, color='black', linewidth=1)  # Asse X
+        axs[0][i].axvline(0, color='black', linewidth=1)  # Asse Y
+
+        # Imposta i limiti fissi per gli assi
+        axs[0][i].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+        axs[0][i].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+
+        # Aggiungi etichette e griglia
+        axs[0][i].set_xlabel("Asse X")
+        axs[0][i].set_ylabel("Asse Y")
+        axs[0][i].set_title(titlesR[i])
+        axs[0][i].grid(True)
+    
+    titlesC, tracksC = zip(*tracks_col)
+
+    for i, tracksC in enumerate(tracksC):
+        axs[1][i].set_title(titlesC[i])
+
+        for track in tracksC:
+            x, y = zip(*track)
+            axs[1][i].plot(x, y, marker='o')
+
+        xd, yd = zip(*drivers)
+        axs[1][i].scatter(xd, yd, color='blue', marker='o')
+
+        axs[1][i].scatter(polo[0], polo[1], color='red', marker='o')
+
+        # Aggiungi assi cartesiani centrati in (0,0)
+        axs[1][i].axhline(0, color='black', linewidth=1)  # Asse X
+        axs[1][i].axvline(0, color='black', linewidth=1)  # Asse Y
+
+        # Imposta i limiti fissi per gli assi
+        axs[1][i].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+        axs[1][i].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+
+        # Aggiungi etichette e griglia
+        axs[1][i].set_xlabel("Asse X")
+        axs[1][i].set_ylabel("Asse Y")
+        axs[1][i].set_title(titlesC[i])
+        axs[1][i].grid(True)
+    
+    plt.show()

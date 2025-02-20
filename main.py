@@ -6,7 +6,7 @@ from ls.ls1 import ls1
 from ls.ls2 import ls2
 from ls.ls3 import ls3
 from ls.msls import msls
-from utils import generatore, plot_all, funzione_obiettivo
+from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
 istanza = 2
@@ -58,6 +58,8 @@ print(f"Funzione Obiettivo Greedy 2: {fo_greedy2}")
 
 #plot_all("Greedy 2", tracks_greedy2, users, drivers, polo, map_size)
 
+plot_2(users, drivers, polo, map_size, "GREEDY", "Greedy 1 - FO: "+str(fo_greedy1), tracks_greedy1, "Greedy 2- FO: "+str(fo_greedy2), tracks_greedy2)
+
 # K-MEANS 1
 # Copia delle istanze originali
 users1 = users.copy()
@@ -83,6 +85,8 @@ fo_kmeans2 = round(funzione_obiettivo(tracks_kmeans2), 1)
 print(f"Funzione Obiettivo K-Means 2: {fo_kmeans2}")
 
 #plot_all("K-Means 2", tracks_kmeans2, users, drivers, polo, map_size)
+
+plot_2(users, drivers, polo, map_size, "K-MEANS", "K-Means 1 - FO: "+str(fo_kmeans1), tracks_kmeans1, "K-Means 2- FO: "+str(fo_kmeans2), tracks_kmeans2)
 
 # LOCAL SEARCH 1 - GREEDY
 # Copia delle istanze originali
@@ -110,6 +114,10 @@ print(f"Funzione Obiettivo Local Search 1 K-Means: {fo_ls1_kmeans}")
 
 #plot_all("Local Search 1 K-Means", tracks_ls1_kmeans, users, drivers, polo, map_size)
 
+plot_2_2(users, drivers, polo, map_size, "LOCAL SEARCH 1", 
+        tracks_row=[("Greedy 2 - FO: " + str(fo_greedy2), tracks_greedy2), ("K-Means 2 - FO: " + str(fo_kmeans2), tracks_kmeans2)], 
+        tracks_col=[("LS1 Greedy - FO: " + str(fo_ls1_greedy), tracks_ls1_greedy), ("LS1 K-Means - FO: " + str(fo_ls1_kmeans), tracks_ls1_kmeans)])
+
 # LOCAL SEARCH 2 - GREEDY
 # Copia delle istanze originali
 users1 = users.copy()
@@ -135,6 +143,10 @@ fo_ls2_kmeans = round(funzione_obiettivo(tracks_ls2_kmeans), 1)
 print(f"Funzione Obiettivo Local Search 2 K-Means: {fo_ls2_kmeans}")
 
 #plot_all("Local Search 2 K-Means", tracks_ls2_kmeans, users, drivers, polo, map_size)
+
+plot_2_2(users, drivers, polo, map_size, "LOCAL SEARCH 2", 
+        tracks_row=[("Greedy 2 - FO: " + str(fo_greedy2), tracks_greedy2), ("K-Means 2 - FO: " + str(fo_kmeans2), tracks_kmeans2)], 
+        tracks_col=[("LS2 Greedy - FO: " + str(fo_ls2_greedy), tracks_ls2_greedy), ("LS2 K-Means - FO: " + str(fo_ls2_kmeans), tracks_ls2_kmeans)])
 
 # LOCAL SEARCH 3 - GREEDY
 # Copia delle istanze originali
@@ -162,6 +174,10 @@ print(f"Funzione Obiettivo Local Search 3 K-Means: {fo_ls3_kmeans}")
 
 #plot_all("Local Search 3 K-Means", tracks_ls3_kmeans, users, drivers, polo, map_size)
 
+plot_2_2(users, drivers, polo, map_size, "LOCAL SEARCH 3", 
+        tracks_row=[("Greedy 2 - FO: " + str(fo_greedy2), tracks_greedy2), ("K-Means 2 - FO: " + str(fo_kmeans2), tracks_kmeans2)], 
+        tracks_col=[("LS3 Greedy - FO: " + str(fo_ls3_greedy), tracks_ls3_greedy), ("LS3 K-Means - FO: " + str(fo_ls3_kmeans), tracks_ls3_kmeans)])
+
 # MULTI START LOCAL SEARCH - GREEDY
 # Copia delle istanze originali
 users1 = users.copy()
@@ -188,30 +204,6 @@ print(f"Funzione Obiettivo Multi Start Local Search K-Means: {fo_msls_kmeans}")
 
 #plot_all("Multi Start Local Search - K-Means", tracks_msls_kmeans, users, drivers, polo, map_size)
 
-
-"""
-plot_total(users, drivers, polo, map_size, [("Greedy - FO: " + str(fo_greedy), tracks_greedy),
-                                  ("K-Means - FO: " + str(fo_kmeans), tracks_kmeans),
-                                  ("VRP3 - FO: " + str(fo_vrp), tracks_vrp),
-                                  ("LS1 Greedy - FO: " + str(fo_ls), tracks_ls),
-                                  ("LS1 K-Means - FO: " + str(fo_ls_vrp), tracks_ls_vrp)])
-
-
-plot_total(users, drivers, polo, map_size, [("Greedy - FO: " + str(fo_greedy), tracks_greedy),
-                                  ("K-Means - FO: " + str(fo_kmeans), tracks_kmeans),
-                                  ("VRP - FO: " + str(fo_vrp), tracks_vrp),
-                                  ("LS1 Greedy - FO: " + str(fo_ls1_greedy), tracks_ls1_greedy),
-                                  ("LS1 K-Means - FO: " + str(fo_ls1_kmeans), tracks_ls1_kmeans),])
-
-plot_total(users, drivers, polo, map_size, [("Greedy - FO: " + str(fo_greedy), tracks_greedy),
-                                  ("K-Means - FO: " + str(fo_kmeans), tracks_kmeans),
-                                  ("VRP - FO: " + str(fo_vrp), tracks_vrp),
-                                  ("LS2 Greedy - FO: " + str(fo_ls2_greedy), tracks_ls2_greedy),
-                                  ("LS2 K-Means - FO: " + str(fo_ls2_kmeans), tracks_ls2_kmeans)])
-
-plot_total(users, drivers, polo, map_size, [("Greedy - FO: " + str(fo_greedy), tracks_greedy),
-                                  ("K-Means - FO: " + str(fo_kmeans), tracks_kmeans),
-                                  ("VRP - FO: " + str(fo_vrp), tracks_vrp),
-                                  ("LS3 Greedy - FO: " + str(fo_ls3_greedy), tracks_ls3_greedy),
-                                  ("LS3 K-Means - FO: " + str(fo_ls3_kmeans), tracks_ls3_kmeans)])
-"""
+plot_2_2(users, drivers, polo, map_size, "MULTI START LOCAL SEARCH", 
+        tracks_row=[("LS3 Greedy - FO: " + str(fo_ls3_greedy), tracks_ls3_greedy), ("LS3 K-Means - FO: " + str(fo_ls3_kmeans), tracks_ls3_kmeans)],
+        tracks_col=[("MSLS LS3 Greedy - FO: " + str(fo_msls_greedy), tracks_msls_greedy), ("MSLS LS3 Greedy - FO: " + str(fo_msls_kmeans), tracks_msls_kmeans)])
