@@ -6,7 +6,7 @@ from ls.ls1 import ls1
 from ls.ls2 import ls2
 from ls.ls3 import ls3
 from ls.msls import msls
-from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all
+from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all, plot_of
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
 istanza = 2
@@ -207,3 +207,7 @@ print(f"Funzione Obiettivo Multi Start Local Search K-Means: {fo_msls_kmeans}")
 plot_2_2(users, drivers, polo, map_size, "MULTI START LOCAL SEARCH", 
         tracks_row=[("LS3 Greedy - FO: " + str(fo_ls3_greedy), tracks_ls3_greedy), ("LS3 K-Means - FO: " + str(fo_ls3_kmeans), tracks_ls3_kmeans)],
         tracks_col=[("MSLS LS3 Greedy - FO: " + str(fo_msls_greedy), tracks_msls_greedy), ("MSLS LS3 Greedy - FO: " + str(fo_msls_kmeans), tracks_msls_kmeans)])
+
+plot_of([("Greedy 1", fo_greedy1), ("Greedy 2", fo_greedy2), ("K-Means 1", fo_kmeans1), ("K-Means 2", fo_kmeans2),
+        ("LS1 Greedy", fo_ls1_greedy), ("LS1 K-Means", fo_ls1_kmeans), ("LS2 Greedy", fo_ls2_greedy), ("LS2 K-Means", fo_ls2_kmeans),
+        ("LS3 Greedy", fo_ls3_greedy), ("LS3 K-Means", fo_ls3_kmeans), ("MSLS Greedy", fo_msls_greedy), ("MSLS K-Means", fo_msls_kmeans)])

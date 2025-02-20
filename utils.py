@@ -306,3 +306,13 @@ def plot_2_2(users, drivers, polo, map_size, title, tracks_row, tracks_col):
         axs[1][i].grid(True)
     
     plt.show()
+
+def plot_of(obj_func):
+    title, obj_func = zip(*obj_func)
+    #Grafico a barre della funzione obiettivo
+    plt.figure(figsize=(16, 6))
+    plt.bar(title, obj_func)
+    plt.xlabel('Algoritmo')
+    plt.ylabel('Funzione Obiettivo')
+    plt.title('Confronto Funzione Obiettivo')
+    plt.show()
