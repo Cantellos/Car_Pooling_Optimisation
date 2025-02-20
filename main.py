@@ -57,6 +57,7 @@ tracks_kmeans = kmeans4(users1, drivers1, polo1)
 fo_kmeans = funzione_obiettivo(tracks_kmeans)
 print(f"Funzione Obiettivo K-Means: {fo_kmeans}")
 
+# VRP
 # Copia delle istanze originali
 users1 = users.copy() 
 drivers1 = drivers.copy()
