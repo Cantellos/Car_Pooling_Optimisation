@@ -1,4 +1,6 @@
 from utils import distanza, funzione_obiettivo
+from greedy.greedy2 import greedy2
+from kmeans.kmeans2 import kmeans2
 
 def costo(track):
     c = 0
@@ -6,7 +8,13 @@ def costo(track):
         c += distanza(track[i], track[i+1])
     return c
 
-def ls3(users, drivers, polo, tracks):
+def ls3(users, drivers, polo, base):
+
+    # Scegli da quale euristica costruttiva iniziare
+    if base == "greedy":
+        tracks = greedy2(users.copy(), drivers.copy(), polo.copy())
+    elif base == "kmeans":
+        tracks = kmeans2(users.copy(), drivers.copy(), polo.copy())
 
     tracks_c = tracks.copy()
 
@@ -21,14 +29,12 @@ def ls3(users, drivers, polo, tracks):
             excluded.append(tracks_c[i])
 
     while(improved):
-
         best_saving = 0
         improved = False
 
         # Mossa 1: swap user liberi con user in macchina
         best_tracks = tracks_c.copy()
         best_tracks1 = tracks_c.copy()
-
         upgrades1=0
         
         for t in range(len(tracks_c)):
@@ -146,5 +152,5 @@ def ls3(users, drivers, polo, tracks):
             tracks_c = best_tracks2
         else:
             tracks_c = best_tracks3
-        #print("ls3")
+            
     return tracks_c

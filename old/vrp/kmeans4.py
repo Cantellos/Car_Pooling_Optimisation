@@ -1,28 +1,29 @@
+from utils import distanza
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
-from utils import distanza, funzione_obiettivo
-import random
 
-def get_nn(driver, cusers, polo):
-    # Trova il vicino più vicino
+# TODO: Randomizzare l'ordine dei driver nel kmeans per evitare che il primo driver abbia sempre i migliori vicini
+
+# PRENDE IL PIù VICINO, POI SI POSTA Lì E PRENDE A SUA VOLTA IL PIù VICINO AD ESSO
+
+def get_nn(driver, cusers):
+    # trova il vicino più vicino
     min_dist = 1000000
     nn = None
-    k = 11
 
     for p in cusers:
-        dist = (k * distanza(driver, p)) / distanza(p, polo)
+        dist = distanza(driver, p)
         if dist < min_dist:
             min_dist = dist
             nn = p
     return nn, min_dist
+    
 
 def kmeans2(users, drivers, polo):
-
-    drivers_c = drivers.copy()
-
     # Applichiamo K-Means con n. driver clusters
-    kmeans = KMeans(n_clusters=len(drivers_c), n_init=1, init=np.array(drivers_c))
-    # Fit di K-Means su users e drivers_c
+    kmeans = KMeans(n_clusters=len(drivers), n_init=1, init=np.array(drivers))
+    # fit di kmeans su users e drivers
     X = np.array(users)
     kmeans.fit(X)
     y_kmeans = kmeans.predict(X)
@@ -31,17 +32,18 @@ def kmeans2(users, drivers, polo):
 
     # Limitiamo il numero di elementi in ogni cluster
     max_elements_per_cluster = 4
-    for cluster in range(len(drivers_c)):            
+    cluster_counts = np.bincount(y_kmeans) # Conta il numero di elementi per cluster
+    for cluster in range(len(drivers)):            
         # Trovo gli elementi del cluster
         indices = np.where(y_kmeans == cluster)[0]
         cluster_users = [users[i] for i in indices]
-        tracks.append([drivers_c[cluster]])
+        tracks.append([drivers[cluster]])
         
         for i in range(min(max_elements_per_cluster, len(cluster_users))):
-            nn, _ = get_nn(drivers_c[cluster], cluster_users, polo)
+            nn, _ = get_nn(drivers[cluster], cluster_users)
             tracks[cluster].append(nn)
             cluster_users.remove(nn)
-            drivers_c[cluster] = nn
+            drivers[cluster] = nn
         tracks[cluster].append(polo)
 
         excluded = []
@@ -53,10 +55,17 @@ def kmeans2(users, drivers, polo):
         # Riassegna gli elementi esclusi al prossimo cluster
         for idx in excluded:
             y_kmeans[idx] += 1
+    
 
-    # Aggiungiamo gli users che non sono stati assegnati
+    # Visualizziamo i risultati
+    plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap='viridis', edgecolor='k', alpha=0.7)
+    plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='red', marker='X')
+    plt.title("Clustering con K-Means")
+    plt.show()
+
+    # aggiungiamo gli users che non sono stati assegnati
     for i in range(len(X)):
-        if y_kmeans[i] == len(drivers_c):
+        if y_kmeans[i] == len(drivers):
             tracks.append([X[i].tolist(), polo])
-
+    
     return tracks
