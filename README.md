@@ -39,6 +39,10 @@ where:
 
 Once the nearest passenger is found, the driver moves to its location, and the calculation is repeated from that point. The algorithm terminates when the driver's car is full, and then they can proceed to the destination.
 
+### Greedy Results
+
+![ResultGreedy](https://github.com/user-attachments/assets/49ae1815-7f5b-4c14-9d07-457badb15634)
+
 ## Constructive Greedy Algorithms
 
 ### K-Means 1 Algorithm
@@ -61,6 +65,10 @@ This algorithm uses the same K-Means algorithm described in K-Means 1 but once t
 
 Also for this algorithm the centroids are initialized at the drivers' positions, and the algorithm iterates by modifying the centroids' positions and assigning users to clusters until it reaches a stable state where no further changes are made. Once the final clusters are obtained, starting from the driver, the route is created using the formula described in Greedy 2, which considers both the distance between the driver and the passenger and the distance between the passenger and the destination.
 
+### K-Means Results
+
+![ResultKMeans](https://github.com/user-attachments/assets/d12875c9-84e2-474c-9919-0bcd0f8437ff)
+
 ## Local Search Algorithms
 
 ### Local Search 1 Algorithm
@@ -72,6 +80,10 @@ Also for this algorithm the centroids are initialized at the drivers' positions,
 - Lorem Ipsum
 - Lorem Ipsum
 
+### Local Search 1 Results
+
+![ResultLocalSearch1](https://github.com/user-attachments/assets/20922a68-ed32-461f-8f3a-6c0dbc9bdc3d)
+
 ### Local Search 2 Algorithm
 
 **Idea:** Lorem Ipsum
@@ -80,6 +92,10 @@ Also for this algorithm the centroids are initialized at the drivers' positions,
 - Lorem Ipsum
 - Lorem Ipsum
 - Lorem Ipsum
+
+### Local Search 2 Results
+
+![ResultLocalSearch2](https://github.com/user-attachments/assets/a618270d-7574-423b-88be-acd6d0051fe4)
 
 ### Local Search 3 Algorithm
 
@@ -90,6 +106,10 @@ Also for this algorithm the centroids are initialized at the drivers' positions,
 - Lorem Ipsum
 - Lorem Ipsum
 
+### Local Search 3 Results
+
+![ResultLocalSearch3](https://github.com/user-attachments/assets/693225ce-4d86-4fec-8aa5-116668e8dd00)
+
 ## Multi Start Local Search Algorithm
 
 **Idea:** Lorem Ipsum
@@ -98,5 +118,9 @@ Also for this algorithm the centroids are initialized at the drivers' positions,
 - Lorem Ipsum
 - Lorem Ipsum
 - Lorem Ipsum
+
+### Multi Start Local Search Results
+
+![ResultMultiStartLocalSearch](https://github.com/user-attachments/assets/c1df94fa-7459-4f25-9374-883ed717b30e)
 
 ## Project Structure
