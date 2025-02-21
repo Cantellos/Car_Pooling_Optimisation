@@ -6,10 +6,11 @@ from ls.ls1 import ls1
 from ls.ls2 import ls2
 from ls.ls3 import ls3
 from ls.msls import msls
+from ga1 import ga1
 from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all, plot_of
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
-istanza = 2
+istanza = 1
 
 if istanza == 1:
     # Piccola istanza
@@ -27,11 +28,11 @@ elif istanza == 3:
     n_drivers = 50
     map_size = 500
 
-seed = None # Seed istanza da utilizzare (None = random)
+seed = 2 # Seed istanza da utilizzare (None = random)
 
 # Generazione delle istanze
 users, drivers, polo = generatore(tot_users, n_drivers, map_size, seed)
-
+"""
 # GREEDY 1
 # Copia delle istanze originali
 users1 = users.copy()
@@ -211,3 +212,16 @@ plot_2_2(users, drivers, polo, map_size, "MULTI START LOCAL SEARCH",
 plot_of([("Greedy 1", fo_greedy1), ("Greedy 2", fo_greedy2), ("K-Means 1", fo_kmeans1), ("K-Means 2", fo_kmeans2),
         ("LS1 Greedy", fo_ls1_greedy), ("LS1 K-Means", fo_ls1_kmeans), ("LS2 Greedy", fo_ls2_greedy), ("LS2 K-Means", fo_ls2_kmeans),
         ("LS3 Greedy", fo_ls3_greedy), ("LS3 K-Means", fo_ls3_kmeans), ("MSLS Greedy", fo_msls_greedy), ("MSLS K-Means", fo_msls_kmeans)])
+"""
+# GENETIC ALGORITHM - GREEDY
+# Copia delle istanze originali
+users1 = users.copy()
+drivers1 = drivers.copy()
+polo1 = polo.copy()
+# Esecuzione algoritmo Local Search con VRP
+tracks_ga1 = ga1(users1, drivers1, polo1)
+# Calcolo della funzione obiettivo
+fo_ga1 = round(funzione_obiettivo(tracks_ga1), 1)
+print(f"Funzione Obiettivo Genetic Algorithm Greedy: {fo_ga1}")
+
+plot_all("Genetic Algorithm Greedy", tracks_ga1, users, drivers, polo, map_size)
