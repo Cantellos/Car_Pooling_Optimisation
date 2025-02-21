@@ -56,7 +56,7 @@ class GeneticAlgorithm:
 
     def crossover(self, parent1, parent2):
         size = len(parent1)
-        start, end = sorted(random.sample(range(size), n))
+        start, end = sorted(random.sample(range(size), 2))
         child = [None] * size
         child[start:end] = parent1[start:end]
         # TODO: da un genitore passare solo posizioni relative (ordine) e non assolute 
