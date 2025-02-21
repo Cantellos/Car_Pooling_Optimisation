@@ -1,4 +1,4 @@
-# CarSharing_RicercaOperativa
+# CarSharing RicercaOperativa
 
 ## Overview
 
@@ -21,36 +21,35 @@ For each driver, a function is used to calculate the nearest passenger among all
 ### Greedy 2 Algorithm
 
 **Idea:** 
-The basic idea is the same as the Greedy 1 algorithm, but the method for evaluating which passenger is most convenient to pick up before reaching the destination changes. In this method, the distance between the driver and the passenger and the distance between the passenger and the destination are evaluated.
+The basic idea is the same as the Greedy 1 algorithm, but changes the method for evaluating which passenger is most convenient to pick up before reaching the destination. In this method, the distance between the driver and the passenger and the distance between the passenger and the destination are evaluated.
 
 **Implementation:**
 For each driver, a function is used to calculate the nearest passenger among all users. The distance is calculate using the formula:
 $$dist = \frac{k \: d_{D-U}}{d_{U-P}}$$
 where:
-$d_{D-U}$ is the Eculidean Distance between the driver and the user, 
-$d_{D-U}$ is the Eculidean Distance between the user and the polo and
-$k$ is a parameter used to add weight to the distance $d_{D-U}$.
+- $k$ is a parameter used to add weight to the distance $d_{D-U}$
+- $d_{D-U}$ is the Euclidean Distance between the driver and the user
+- $d_{U-P}$ is the Euclidean Distance between the user and the polo
+
 Once the nearest passenger is found, the driver moves to its location, and the calculation is repeated from that point. The algorithm terminates when the driver's car is full, and then they can proceed to the destination.
 
 ## Constructive Greedy Algorithms
 
 ### K-Means 1 Algorithm
 
-**Idea:** Lorem Ipsum
+**Idea:** 
+This algorithm uses clustering techniques to optimize the routes taken by drivers. The algorithm used is K-Means, which, starting from the drivers' positions, finds the nearest users in terms of Euclidean distance and adds them to the same cluster. Once the clusters are obtained, the route is created by finding the four nearest neighbors of the driver.
 
 **Implementation:**
-- Lorem Ipsum
-- Lorem Ipsum
-- Lorem Ipsum
+For this algorithm, we used the sklearn library, which provides the implementation of the K-Means algorithm. The centroids are initialized at the drivers' positions, and the algorithm iterates by modifying the centroids' positions and assigning users to clusters until it reaches a stable state where no further changes are made. Once the final clusters are obtained, starting from the driver, the route is created using an algorithm that finds the four nearest neighbors of the driver, that belong to the same cluster.
 
 ### K-Means 2 Algorithm
 
-**Idea:** Lorem Ipsum
+**Idea:** 
+This algorithm uses the same K-Means algorithm described in K-Means 1 but once the clusters are obtained, the route is created using the distance algorithm also used in Greedy 2.
 
 **Implementation:**
-- Lorem Ipsum
-- Lorem Ipsum
-- Lorem Ipsum
+Also for this algorithm the centroids are initialized at the drivers' positions, and the algorithm iterates by modifying the centroids' positions and assigning users to clusters until it reaches a stable state where no further changes are made. Once the final clusters are obtained, starting from the driver, the route is created using the formula described in Greedy 2, which considers both the distance between the driver and the passenger and the distance between the passenger and the destination.
 
 ## Local Search Algorithms
 
