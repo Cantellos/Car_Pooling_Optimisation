@@ -28,7 +28,7 @@ elif istanza == 3:
     n_drivers = 50
     map_size = 500
 
-seed = 2 # Seed istanza da utilizzare (None = random)
+seed = 1 # Seed istanza da utilizzare (None = random)
 
 # Generazione delle istanze
 users, drivers, polo = generatore(tot_users, n_drivers, map_size, seed)

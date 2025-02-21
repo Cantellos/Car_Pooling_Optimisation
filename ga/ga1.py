@@ -49,17 +49,34 @@ def crossover(parent1, parent2):
 def get_remaining(users, drivers, child):
     users_c = []
     drivers_c = []
+
+    i = 0
+
+    print("Users: ", users)
+    print("Drivers: ", drivers)
     
+    print("users_ Before: ", users)
+    print("drivers_c Before: ", drivers)
+
     for driver in drivers:
         for track in child:
+            #print("Driver 1: ", driver)
+            #print("Track 1: ", track)
             if driver not in track:
                 drivers_c.append(driver)
     
     for user in users:
+        print(f"i: ",i)
+        i+=1
         for track in child:
+            #print("User 2: ", user)
+            #print("Track 2: ", track)
             if user not in track and user not in users_c:
                 users_c.append(user)
-
+    
+    print("users_ After: ", users)
+    print("drivers_c After: ", drivers)
+    print()
     return users_c, drivers_c
 
 def greedy_driver(driver, users_c, polo):
@@ -70,9 +87,10 @@ def greedy_driver(driver, users_c, polo):
         driver = nn
         #print("Users_c: ", users_c)
         #print("NN: ", nn)
+        #print(f"Rimuovo: ", nn, " da ", users_c)
         users_c.remove(nn)
     track.append(polo)
-
+    #print("Track: ", track)
     return track
 
 def costo(track):
@@ -114,9 +132,9 @@ def try_swap(child, excluded, polo):
 def mutate(child, users, drivers, polo):
     users_c, drivers_c = get_remaining(users, drivers, child)
 
-    print("Users_c Mutate: ", users_c)
-    print("Drivers_c Mutate: ", drivers_c)
-    print("Child Mutate: ", child)
+    #print("Users_c Mutate: ", users_c)
+    #print("Drivers_c Mutate: ", drivers_c)
+    #print("Child Mutate: ", child)
     for driver in drivers_c:
         child.append(greedy_driver(driver, users_c, polo))
     
