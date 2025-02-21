@@ -6,7 +6,7 @@ from ls.ls1 import ls1
 from ls.ls2 import ls2
 from ls.ls3 import ls3
 from ls.msls import msls
-from ga1 import ga1
+from ga.ga1 import ga1
 from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all, plot_of
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
