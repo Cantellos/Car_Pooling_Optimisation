@@ -14,6 +14,7 @@ def initialize_population(users, drivers, polo):
     return population
     
 def selection(population):
+    #print("Selection")
     selected = random.choices(population, k=2, weights=[1/fitness(individual) for individual in population])
     return selected
 
@@ -25,7 +26,7 @@ def check_gene(gene, child):
                 return False
     return True
 
-def crossover(parent1, parent2):
+def crossover(parent1, parent2, n_drivers):
     child = []
     
     parent1_d = []  # lista di parent1 con più di 2 elementi
@@ -41,42 +42,25 @@ def crossover(parent1, parent2):
         parent1_d.pop(index)
 
     for gene in parent2:
-        if len(gene) != 2 and check_gene(gene, child):
+        if len(gene) != 2 and check_gene(gene, child) and len(child) < n_drivers-1:
             child.append(gene)
-    
+
     return child
 
 def get_remaining(users, drivers, child):
     users_c = []
     drivers_c = []
 
-    i = 0
-
-    print("Users: ", users)
-    print("Drivers: ", drivers)
-    
-    print("users_ Before: ", users)
-    print("drivers_c Before: ", drivers)
-
     for driver in drivers:
         for track in child:
-            #print("Driver 1: ", driver)
-            #print("Track 1: ", track)
-            if driver not in track:
+            if driver not in track and driver not in drivers_c:
                 drivers_c.append(driver)
     
     for user in users:
-        print(f"i: ",i)
-        i+=1
         for track in child:
-            #print("User 2: ", user)
-            #print("Track 2: ", track)
             if user not in track and user not in users_c:
                 users_c.append(user)
-    
-    print("users_ After: ", users)
-    print("drivers_c After: ", drivers)
-    print()
+
     return users_c, drivers_c
 
 def greedy_driver(driver, users_c, polo):
@@ -85,12 +69,8 @@ def greedy_driver(driver, users_c, polo):
         nn, _ = get_nn(driver, users_c, polo)
         track.append(nn)
         driver = nn
-        #print("Users_c: ", users_c)
-        #print("NN: ", nn)
-        #print(f"Rimuovo: ", nn, " da ", users_c)
         users_c.remove(nn)
     track.append(polo)
-    #print("Track: ", track)
     return track
 
 def costo(track):
@@ -132,9 +112,6 @@ def try_swap(child, excluded, polo):
 def mutate(child, users, drivers, polo):
     users_c, drivers_c = get_remaining(users, drivers, child)
 
-    #print("Users_c Mutate: ", users_c)
-    #print("Drivers_c Mutate: ", drivers_c)
-    #print("Child Mutate: ", child)
     for driver in drivers_c:
         child.append(greedy_driver(driver, users_c, polo))
     
@@ -152,17 +129,25 @@ def evolve(population, users, drivers, polo):
     new_population = []
     for _ in range(len(population)):
         parent1, parent2 = selection(population)
-        child = crossover(parent1, parent2)
+        child = crossover(parent1, parent2, len(drivers))
         child = mutate(child, users, drivers, polo)
         new_population.append(child)
+        #print()
     
     return new_population
         
 def ga1(user, drivers, polo):
     population = initialize_population(user, drivers, polo)
-    for i in range(100):
+    for i in range(10):
         print("Generazione: ", i)
         population = evolve(population, user, drivers, polo)
 
-    return population
+    best_individual = population[0]
+
+    for individual in population:
+        #print(f"Fitness: {fitness(individual)}")
+        if fitness(individual) < fitness(best_individual):
+            best_individual = individual
+    
+    return best_individual
 
