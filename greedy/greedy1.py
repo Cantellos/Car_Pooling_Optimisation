@@ -1,7 +1,7 @@
 from utils import distanza
 import random
 
-def get_nn(driver, users):
+def get_nn(driver, users, polo):
   # Trova il vicino più vicino
   min_dist = 1000000
   nn = None
@@ -11,6 +11,7 @@ def get_nn(driver, users):
       if dist < min_dist:
           min_dist = dist
           nn = p
+          
   return nn, min_dist
 
 def greedy1(users, drivers, polo):
@@ -26,7 +27,7 @@ def greedy1(users, drivers, polo):
     for i in range(len(drivers_c)):
       tracks[i][j] = drivers_c[i]
       if j != 4: 
-        nn, _ = get_nn(drivers_c[i], users)
+        nn, _ = get_nn(drivers_c[i], users, polo)
         drivers_c[i] = nn
         users.remove(nn)
   

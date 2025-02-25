@@ -1,6 +1,8 @@
 from utils import distanza, funzione_obiettivo
+from greedy.greedy1 import greedy1
 from greedy.greedy2 import greedy2
 from kmeans.kmeans2 import kmeans2
+from greedy.greedy_random import greedy_random
 
 def costo(track):
     c = 0
@@ -11,10 +13,14 @@ def costo(track):
 def ls3(users, drivers, polo, base):
 
     # Scegli da quale euristica costruttiva iniziare
-    if base == "greedy":
+    if base == "greedy1":
+        tracks = greedy1(users.copy(), drivers.copy(), polo.copy())
+    elif base == "greedy2":
         tracks = greedy2(users.copy(), drivers.copy(), polo.copy())
     elif base == "kmeans":
         tracks = kmeans2(users.copy(), drivers.copy(), polo.copy())
+    elif base == "random":
+        tracks = greedy_random(users.copy(), drivers.copy(), polo.copy())
 
     tracks_c = tracks.copy()
 

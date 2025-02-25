@@ -10,11 +10,15 @@ def msls(users, drivers, polo, base, n):
     for i in range(n):
 
         # Scegli da quale euristica costruttiva iniziare
-        if base == "greedy":
-            tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "greedy")
+        if base == "greedy1":
+            tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "greedy1")
+        elif base == "greedy2":
+            tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "greedy2")
         elif base == "kmeans":
             tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "kmeans")
-        
+        elif base == "random":
+            tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "random")
+            
         # Se la soluzione trovata è migliore, aggiorna la migliore soluzione trovata finora
         if funzione_obiettivo(tracks) <= best_msls_fo:
             best_msls_fo = funzione_obiettivo(tracks)

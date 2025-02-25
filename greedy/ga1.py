@@ -3,13 +3,13 @@ import random
 from utils import distanza
 
 # Scelgi metodo di utilizzato nel mutate per le routes
-base = "random"
+base = "greedy_random"
 
-if base == "random":
+if base == "greedy_random":
     from greedy.greedy_random import greedy_random as init, get_random as get_next
 elif base == "greedy1":
     from greedy.greedy1 import greedy1 as init, get_nn as get_next
-elif base == "greedy2":
+elif base == "greeedy2":
     from greedy.greedy2 import greedy2 as init, get_nn as get_next
 elif base == "kmeans":
     from kmeans.kmeans2 import kmeans2 as init, get_nn as get_next
@@ -143,9 +143,14 @@ def evolve(population, users, drivers, polo):
     
     for _ in range(len(population)):
         parent1, parent2 = selection(population)
+        #print("Parent1: ", parent1)
+        #print("Parent2: ", parent2)
         child = crossover(parent1, parent2, len(drivers))
+        #print("Child crossover: ", child)
         child = mutate(child, users, drivers, polo)
+        #print("Child mutate: ", child)
         new_population.append(child)
+        #print("New population: ",new_population)
     
     return new_population
         
@@ -154,11 +159,14 @@ def ga1(user, drivers, polo):
 
     best_individual = population[0]
 
-    for i in range(100):
+    for i in range(500):
         population = evolve(population, user, drivers, polo)
 
         for individual in population:
+            #print(f"Fitness: {fitness(individual)}")
             if fitness(individual) < fitness(best_individual):
                 best_individual = individual
-            
+        
+        print(f"Generazione: {i} - Best Individual: {fitness(best_individual)} ")
+    
     return best_individual
