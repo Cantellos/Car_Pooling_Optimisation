@@ -154,7 +154,8 @@ def ga1(user, drivers, polo):
 
     best_individual = population[0]
 
-    for i in range(100):
+    for i in range(500):
+        print("Generation ", i)
         population = evolve(population, user, drivers, polo)
 
         for individual in population:
