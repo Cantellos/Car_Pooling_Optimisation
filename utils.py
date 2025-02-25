@@ -339,8 +339,6 @@ def plot_2_2_base(users, drivers, polo, map_size, title, tracks_row, tracks_col)
 
     titlesR, tracksR = zip(*tracks_row)
 
-    print(tracksR)
-
     axs[0][1].set_title(titlesR[0])
 
     for track in tracksR[0]:

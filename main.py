@@ -11,7 +11,7 @@ from ga.ga1 import ga1
 from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all, plot_of, plot_2_2_base
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
-istanza = 1
+istanza = 2
 
 if istanza == 1:
     # Piccola istanza
