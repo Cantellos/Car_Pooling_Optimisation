@@ -8,7 +8,7 @@ from ls.ls2 import ls2
 from ls.ls3 import ls3
 from ls.msls import msls
 from ga.ga1 import ga1
-from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all, plot_of
+from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all, plot_of, plot_2_2_base
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
 istanza = 1
@@ -29,10 +29,12 @@ elif istanza == 3:
     n_drivers = 50
     map_size = 500
 
-seed = None # Seed istanza da utilizzare (None = random)
+seed = 2 # Seed istanza da utilizzare (None = random)
 
 # Generazione delle istanze
 users, drivers, polo = generatore(tot_users, n_drivers, map_size, seed)
+
+# ------------------------- GREEDY ------------------------- 
 
 # GREEDY RANDOM
 # Copia delle istanze originali
@@ -73,7 +75,13 @@ print(f"Funzione Obiettivo Greedy 2: {fo_greedy2}")
 
 #plot_all("Greedy 2", tracks_greedy2, users, drivers, polo, map_size)
 
-# plot_2(users, drivers, polo, map_size, "GREEDY", "Greedy 1 - FO: "+str(fo_greedy1), tracks_greedy1, "Greedy 2- FO: "+str(fo_greedy2), tracks_greedy2)
+#plot_2_2(users, drivers, polo, map_size, "GREEDY", "Greedy 1 - FO: "+str(fo_greedy1), tracks_greedy1, "Greedy 2- FO: "+str(fo_greedy2), tracks_greedy2)
+
+plot_2_2_base(users, drivers, polo, map_size, "GREEDY", 
+        tracks_row=[("Greedy Random - FO: " + str(fo_greedy_random), tracks_greedy_random)],
+        tracks_col=[("Greedy 1 - FO: " + str(fo_greedy1), tracks_greedy1), ("Greedy 2 - FO: " + str(fo_greedy2), tracks_greedy2)])
+
+# ------------------------- K-MEANS ------------------------- 
 
 # K-MEANS 1
 # Copia delle istanze originali
@@ -101,7 +109,7 @@ print(f"Funzione Obiettivo K-Means 2: {fo_kmeans2}")
 
 #plot_all("K-Means 2", tracks_kmeans2, users, drivers, polo, map_size)
 
-# plot_2(users, drivers, polo, map_size, "K-MEANS", "K-Means 1 - FO: "+str(fo_kmeans1), tracks_kmeans1, "K-Means 2- FO: "+str(fo_kmeans2), tracks_kmeans2)
+plot_2(users, drivers, polo, map_size, "K-MEANS", "K-Means 1 - FO: "+str(fo_kmeans1), tracks_kmeans1, "K-Means 2- FO: "+str(fo_kmeans2), tracks_kmeans2)
 
 # LOCAL SEARCH 1 - GREEDY
 # Copia delle istanze originali
