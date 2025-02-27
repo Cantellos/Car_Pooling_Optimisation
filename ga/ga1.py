@@ -1,19 +1,6 @@
 from utils import funzione_obiettivo as fitness
 import random
 from utils import distanza
-"""
-# Scelgi metodo di utilizzato nel mutate per le routes
-base = "random"
-
-if base == "random":
-    from greedy.greedy_random import greedy_random as init, get_random as get_next
-elif base == "greedy1":
-    from greedy.greedy1 import greedy1 as init, get_nn as get_next
-elif base == "greedy2":
-    from greedy.greedy2 import greedy2 as init, get_nn as get_next
-elif base == "kmeans":
-    from kmeans.kmeans2 import kmeans2 as init, get_nn as get_next
-"""
 
 from greedy.greedy_random import greedy_random as initGR, get_random as get_nextGR
 from greedy.greedy1 import greedy1 as initG1, get_nn as get_nextG1
