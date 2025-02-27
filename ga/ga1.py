@@ -27,7 +27,6 @@ def initialize_population(users, drivers, polo):
     return population
     
 def selection(population):
-    #print("Selection")
     selected = random.choices(population, k=2, weights=[1/fitness(individual) for individual in population])
     return selected
 
@@ -117,7 +116,6 @@ def try_swap(child, excluded, polo):
                         best_tracks.append(track1)
                         best_excluded.remove(excluded[exc])
                         best_excluded.append(track2[0])
-                        #improved = True TODO: aggiungi il while
                 exc += 1
 
     return best_tracks, best_excluded
