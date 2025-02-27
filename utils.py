@@ -307,6 +307,88 @@ def plot_2_2(users, drivers, polo, map_size, title, tracks_row, tracks_col):
     
     plt.show()
 
+def plot_2_2_base(users, drivers, polo, map_size, title, tracks_row, tracks_col):
+    fig, axs = plt.subplots(2, 2, figsize=(16, 14))
+
+    fig.suptitle(title)
+
+    # Grafico 1
+    xu, yu = zip(*users)
+
+    axs[0][0].set_title("Istanza generata")
+
+    axs[0][0].scatter(xu, yu, color='green', marker='o')
+
+    xd, yd = zip(*drivers)
+    axs[0][0].scatter(xd, yd, color='blue', marker='o')
+    
+    axs[0][0].scatter(polo[0], polo[1], color='red', marker='o')
+
+    # Aggiungi assi cartesiani centrati in (0,0)
+    axs[0][0].axhline(0, color='black', linewidth=1)  # Asse X
+    axs[0][0].axvline(0, color='black', linewidth=1)  # Asse Y
+
+    # Imposta i limiti fissi per gli assi
+    axs[0][0].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+    axs[0][0].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+    
+    # Aggiungi etichette e griglia
+    axs[0][0].set_xlabel("Asse X")
+    axs[0][0].set_ylabel("Asse Y")
+    axs[0][0].grid(True)
+
+    titlesR, tracksR = zip(*tracks_row)
+
+    axs[0][1].set_title(titlesR[0])
+
+    for track in tracksR[0]:
+        x, y = zip(*track)
+        axs[0][1].plot(x, y, marker='o')
+
+    # Aggiungi assi cartesiani centrati in (0,0)
+    axs[0][1].axhline(0, color='black', linewidth=1)  # Asse X
+    axs[0][1].axvline(0, color='black', linewidth=1)  # Asse Y
+
+    # Imposta i limiti fissi per gli assi
+    axs[0][1].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+    axs[0][1].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+
+    # Aggiungi etichette e griglia
+    axs[0][1].set_xlabel("Asse X")
+    axs[0][1].set_ylabel("Asse Y")
+    axs[0][1].set_title(titlesR[0])
+    axs[0][1].grid(True)
+    
+    titlesC, tracksC = zip(*tracks_col)
+
+    for i, tracksC in enumerate(tracksC):
+        axs[1][i].set_title(titlesC[i])
+
+        for track in tracksC:
+            x, y = zip(*track)
+            axs[1][i].plot(x, y, marker='o')
+
+        xd, yd = zip(*drivers)
+        axs[1][i].scatter(xd, yd, color='blue', marker='o')
+
+        axs[1][i].scatter(polo[0], polo[1], color='red', marker='o')
+
+        # Aggiungi assi cartesiani centrati in (0,0)
+        axs[1][i].axhline(0, color='black', linewidth=1)  # Asse X
+        axs[1][i].axvline(0, color='black', linewidth=1)  # Asse Y
+
+        # Imposta i limiti fissi per gli assi
+        axs[1][i].set_xlim(-map_size/2 - map_size*0.1, map_size/2 + map_size*0.1)
+        axs[1][i].set_ylim(-map_size/2 - map_size*0.1, map_size/2+ map_size*0.1)
+
+        # Aggiungi etichette e griglia
+        axs[1][i].set_xlabel("Asse X")
+        axs[1][i].set_ylabel("Asse Y")
+        axs[1][i].set_title(titlesC[i])
+        axs[1][i].grid(True)
+    
+    plt.show()
+
 def plot_of(obj_func):
     title, obj_func = zip(*obj_func)
     #Grafico a barre della funzione obiettivo

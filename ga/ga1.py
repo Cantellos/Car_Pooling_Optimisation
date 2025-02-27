@@ -2,25 +2,25 @@ from utils import funzione_obiettivo as fitness
 import random
 from utils import distanza
 
-# Scelgi metodo di utilizzato nel mutate per le routes
-base = "random"
+from greedy.greedy_random import greedy_random as initGR, get_random as get_nextGR
+from greedy.greedy1 import greedy1 as initG1, get_nn as get_nextG1
+from greedy.greedy2 import greedy2 as initG2, get_nn as get_nextG2
+from kmeans.kmeans2 import kmeans2 as initKM, get_nn as get_nextKM
 
-if base == "random":
-    from greedy.greedy_random import greedy_random as init, get_random as get_next
-elif base == "greedy1":
-    from greedy.greedy1 import greedy1 as init, get_nn as get_next
-elif base == "greedy2":
-    from greedy.greedy2 import greedy2 as init, get_nn as get_next
-elif base == "kmeans":
-    from kmeans.kmeans2 import kmeans2 as init, get_nn as get_next
-
-def initialize_population(users, drivers, polo):
+def initialize_population(users, drivers, polo, base):
     population = []
     for _ in range(100):
         users_c = users.copy()
         drivers_c = drivers.copy()
 
-        individual = init(users_c, drivers_c, polo)
+        if base == "random":
+            individual = initGR(users_c, drivers_c, polo)
+        elif base == "greedy1":
+            individual = initG1(users_c, drivers_c, polo)
+        elif base == "greedy2":
+            individual = initG2(users_c, drivers_c, polo)
+        elif base == "kmeans":
+            individual = initKM(users_c, drivers_c, polo)
         
         population.append(individual)
 
@@ -75,10 +75,18 @@ def get_remaining(users, drivers, child):
 
     return users_c, drivers_c
 
-def greedy_driver(driver, users_c, polo):
+def greedy_driver(driver, users_c, polo, base):
     track = [driver]
     for _ in range(4):
-        nn, _ = get_next(driver, users_c, polo)
+        if base == "random":
+            nn, _ = get_nextGR(driver, users_c, polo)
+        elif base == "greedy1":
+            nn, _ = get_nextG1(driver, users_c, polo)
+        elif base == "greedy2":
+            nn, _ = get_nextG2(driver, users_c, polo)
+        elif base == "kmeans":
+            nn, _ = get_nextKM(driver, users_c, polo)
+
         track.append(nn)
         driver = nn
         users_c.remove(nn)
@@ -120,11 +128,11 @@ def try_swap(child, excluded, polo):
 
     return best_tracks, best_excluded
 
-def mutate(child, users, drivers, polo):
+def mutate(child, users, drivers, polo, base):
     users_c, drivers_c = get_remaining(users, drivers, child)
 
     for driver in drivers_c:
-        child.append(greedy_driver(driver, users_c, polo))
+        child.append(greedy_driver(driver, users_c, polo, base))
     
     if random.random() < 0.2:
         child, users_c = try_swap(child, users_c, polo)
@@ -136,24 +144,25 @@ def mutate(child, users, drivers, polo):
 
     return child
     
-def evolve(population, users, drivers, polo):
+def evolve(population, users, drivers, polo, base):
     new_population = []
     
     for _ in range(len(population)):
         parent1, parent2 = selection(population)
         child = crossover(parent1, parent2, len(drivers))
-        child = mutate(child, users, drivers, polo)
+        child = mutate(child, users, drivers, polo, base)
         new_population.append(child)
     
     return new_population
         
-def ga1(user, drivers, polo):
-    population = initialize_population(user, drivers, polo)
+def ga1(user, drivers, polo, base):
+    population = initialize_population(user, drivers, polo, base)
 
     best_individual = population[0]
 
     for i in range(100):
-        population = evolve(population, user, drivers, polo)
+        #print("Generation ", i)
+        population = evolve(population, user, drivers, polo, base)
 
         for individual in population:
             if fitness(individual) < fitness(best_individual):
