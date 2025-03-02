@@ -1,15 +1,16 @@
-from utils import distanza, funzione_obiettivo
+from utils import distanza
 from greedy.greedy1 import greedy1
 from greedy.greedy2 import greedy2
 from kmeans.kmeans2 import kmeans2
 from greedy.greedy_random import greedy_random
+
 def costo(track):
     c = 0
     for i in range(len(track)-1):
         c += distanza(track[i], track[i+1])
     return c
 
-def ls1(users, drivers, polo, base):
+def vnd(users, drivers, polo, base):
 
     # Scegli da quale euristica costruttiva iniziare
     if base == "greedy1":
@@ -20,20 +21,20 @@ def ls1(users, drivers, polo, base):
         tracks = kmeans2(users.copy(), drivers.copy(), polo.copy())
     elif base == "random":
         tracks = greedy_random(users.copy(), drivers.copy(), polo.copy())
-        
+
     # Mossa 1: swap user liberi con user in macchina
     tracks_c = tracks.copy()
     best_tracks = tracks.copy()
-    best_tracks1 = tracks.copy()
-
-    excluded = []
-    best_excluded = []
+    drivers_c = drivers.copy()
 
     improved = True
     upgrades1=0
 
+    excluded = []
+    best_excluded = excluded.copy()
+
     for i in range(len(tracks_c)):
-        if tracks_c[i][0] not in drivers and len(tracks_c[i])==2:
+        if tracks_c[i][0] not in drivers_c and len(tracks_c[i])==2:
             excluded.append(tracks_c[i])
 
     while(improved):
@@ -78,13 +79,10 @@ def ls1(users, drivers, polo, base):
                     exc += 1
 
         excluded = best_excluded.copy()
-        best_tracks1 = best_tracks.copy()
-        tracks_c = best_tracks.copy()  
-
+        tracks_c = best_tracks.copy()
+        
     # Mossa 2: Swap user di driver diversi
-    tracks_c = tracks.copy()
-    best_tracks = tracks.copy()
-    best_tracks2 = tracks.copy()
+    best_tracks = tracks_c.copy()
     
     improved = True
     upgrades2 = 0
@@ -122,13 +120,10 @@ def ls1(users, drivers, polo, base):
                                 improved = True
                                 upgrades2 += 1
 
-        best_tracks2 = best_tracks.copy()
         tracks_c = best_tracks.copy()
 
     # Mossa 3: swap ordine user stessa macchina
-    tracks_c = tracks.copy()
-    best_tracks = tracks.copy()
-    best_tracks3 = tracks.copy()
+    best_tracks = tracks_c.copy()
 
     improved = True
     upgrades3 = 0
@@ -161,12 +156,6 @@ def ls1(users, drivers, polo, base):
                             improved = True
                             upgrades3 += 1
 
-        best_tracks3 = best_tracks.copy()
         tracks_c = best_tracks.copy()
 
-    if funzione_obiettivo(best_tracks1) <= funzione_obiettivo(best_tracks2) and funzione_obiettivo(best_tracks1) <= funzione_obiettivo(best_tracks3):
-        return best_tracks1
-    elif funzione_obiettivo(best_tracks2) <= funzione_obiettivo(best_tracks1) and funzione_obiettivo(best_tracks2) <= funzione_obiettivo(best_tracks3):
-        return best_tracks2
-    else:
-        return best_tracks3
+    return tracks_c

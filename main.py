@@ -3,9 +3,9 @@ from greedy.greedy2 import greedy2
 from greedy.greedy_random import greedy_random
 from kmeans.kmeans1 import kmeans1
 from kmeans.kmeans2 import kmeans2
-from ls.ls1 import ls1
-from ls.ls2 import ls2
-from ls.ls3 import ls3
+from ls.ls import ls
+from ls.vnd import vnd
+from ls.vlsn import vlsn
 from ls.msls import msls
 from ga.ga1 import ga1
 from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all, plot_of, plot_2_2_base
@@ -119,12 +119,12 @@ users1 = users.copy()
 drivers1 = drivers.copy()
 polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con Greedy
-tracks_ls1_greedy = ls1(users1, drivers1, polo1, "greedy1")
+tracks_ls_greedy = ls(users1, drivers1, polo1, "greedy1")
 # Calcolo della funzione obiettivo
-fo_ls1_greedy = round(funzione_obiettivo(tracks_ls1_greedy), 1)
-print(f"Funzione Obiettivo Local Search 1 Greedy: {fo_ls1_greedy}")
+fo_ls_greedy = round(funzione_obiettivo(tracks_ls_greedy), 1)
+print(f"Funzione Obiettivo Local Search Greedy: {fo_ls_greedy}")
 
-#plot_all("Local Search 1 Greedy", tracks_ls1_greedy, users, drivers, polo, map_size)
+#plot_all("Local Search 1 Greedy", tracks_ls_greedy, users, drivers, polo, map_size)
 
 # LOCAL SEARCH 1 - KMEANS
 # Copia delle istanze originali
@@ -132,16 +132,16 @@ users1 = users.copy()
 drivers1 = drivers.copy()
 polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con VRP
-tracks_ls1_kmeans = ls1(users1, drivers1, polo1, "kmeans")
+tracks_ls_kmeans = ls(users1, drivers1, polo1, "kmeans")
 # Calcolo della funzione obiettivo
-fo_ls1_kmeans = round(funzione_obiettivo(tracks_ls1_kmeans), 1)
-print(f"Funzione Obiettivo Local Search 1 K-Means: {fo_ls1_kmeans}")
+fo_ls_kmeans = round(funzione_obiettivo(tracks_ls_kmeans), 1)
+print(f"Funzione Obiettivo Local Search K-Means: {fo_ls_kmeans}")
 
-#plot_all("Local Search 1 K-Means", tracks_ls1_kmeans, users, drivers, polo, map_size)
+#plot_all("Local Search 1 K-Means", tracks_ls_kmeans, users, drivers, polo, map_size)
 
 plot_2_2(users, drivers, polo, map_size, "LOCAL SEARCH 1", 
         tracks_row=[("Greedy 1 - FO: " + str(fo_greedy1), tracks_greedy1), ("K-Means 2 - FO: " + str(fo_kmeans2), tracks_kmeans2)], 
-        tracks_col=[("LS1 Greedy 1 - FO: " + str(fo_ls1_greedy), tracks_ls1_greedy), ("LS1 K-Means 2 - FO: " + str(fo_ls1_kmeans), tracks_ls1_kmeans)])
+        tracks_col=[("LS Greedy 1 - FO: " + str(fo_ls_greedy), tracks_ls_greedy), ("LS K-Means 2 - FO: " + str(fo_ls_kmeans), tracks_ls_kmeans)])
 
 # ------------------------- LOCAL SEARCH 2 ------------------------- 
 
@@ -151,12 +151,12 @@ users1 = users.copy()
 drivers1 = drivers.copy()
 polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con Greedy
-tracks_ls2_greedy = ls2(users1, drivers1, polo1, "greedy1")
+tracks_vnd_greedy = vnd(users1, drivers1, polo1, "greedy1")
 # Calcolo della funzione obiettivo
-fo_ls2_greedy = round(funzione_obiettivo(tracks_ls2_greedy), 1)
-print(f"Funzione Obiettivo Local Search 2 Greedy: {fo_ls2_greedy}")
+fo_vnd_greedy = round(funzione_obiettivo(tracks_vnd_greedy), 1)
+print(f"Funzione Obiettivo Variable Neighborhood Descent Greedy: {fo_vnd_greedy}")
 
-#plot_all("Local Search 2 Greedy", tracks_ls2_greedy, users, drivers, polo, map_size)
+#plot_all("Local Search 2 Greedy", tracks_vnd_greedy, users, drivers, polo, map_size)
 
 # LOCAL SEARCH 2 - KMEANS
 # Copia delle istanze originali
@@ -164,16 +164,16 @@ users1 = users.copy()
 drivers1 = drivers.copy()
 polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con VRP
-tracks_ls2_kmeans = ls2(users1, drivers1, polo1, "kmeans")
+tracks_vnd_kmeans = vnd(users1, drivers1, polo1, "kmeans")
 # Calcolo della funzione obiettivo
-fo_ls2_kmeans = round(funzione_obiettivo(tracks_ls2_kmeans), 1)
-print(f"Funzione Obiettivo Local Search 2 K-Means: {fo_ls2_kmeans}")
+fo_vnd_kmeans = round(funzione_obiettivo(tracks_vnd_kmeans), 1)
+print(f"Funzione Obiettivo Variable Neighborhood Descent K-Means: {fo_vnd_kmeans}")
 
-#plot_all("Local Search 2 K-Means", tracks_ls2_kmeans, users, drivers, polo, map_size)
+#plot_all("Local Search 2 K-Means", tracks_vnd_kmeans, users, drivers, polo, map_size)
 
 plot_2_2(users, drivers, polo, map_size, "LOCAL SEARCH 2", 
         tracks_row=[("Greedy 1 - FO: " + str(fo_greedy1), tracks_greedy1), ("K-Means 2 - FO: " + str(fo_kmeans2), tracks_kmeans2)], 
-        tracks_col=[("LS2 Greedy - FO: " + str(fo_ls2_greedy), tracks_ls2_greedy), ("LS2 K-Means - FO: " + str(fo_ls2_kmeans), tracks_ls2_kmeans)])
+        tracks_col=[("VND Greedy - FO: " + str(fo_vnd_greedy), tracks_vnd_greedy), ("VND K-Means - FO: " + str(fo_vnd_kmeans), tracks_vnd_kmeans)])
 
 # ------------------------- LOCAL SEARCH 3 ------------------------- 
 
@@ -183,12 +183,12 @@ users1 = users.copy()
 drivers1 = drivers.copy()
 polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con Greedy
-tracks_ls3_greedy = ls3(users1, drivers1, polo1, "greedy1")
+tracks_vlsn_greedy = vlsn(users1, drivers1, polo1, "greedy1")
 # Calcolo della funzione obiettivo
-fo_ls3_greedy = round(funzione_obiettivo(tracks_ls3_greedy), 1)
-print(f"Funzione Obiettivo Local Search 3 Greedy: {fo_ls3_greedy}")
+fo_vlsn_greedy = round(funzione_obiettivo(tracks_vlsn_greedy), 1)
+print(f"Funzione Obiettivo Very Large Size Neighborhood Search Greedy: {fo_vlsn_greedy}")
 
-#plot_all("Local Search 3 Greedy", tracks_ls3_greedy, users, drivers, polo, map_size)
+#plot_all("Local Search 3 Greedy", tracks_vlsn_greedy, users, drivers, polo, map_size)
 
 # LOCAL SEARCH 3 - KMEANS
 # Copia delle istanze originali
@@ -196,16 +196,16 @@ users1 = users.copy()
 drivers1 = drivers.copy()
 polo1 = polo.copy()
 # Esecuzione algoritmo Local Search con VRP
-tracks_ls3_kmeans = ls3(users1, drivers1, polo1, "kmeans")
+tracks_vlsn_kmeans = vlsn(users1, drivers1, polo1, "kmeans")
 # Calcolo della funzione obiettivo
-fo_ls3_kmeans = round(funzione_obiettivo(tracks_ls3_kmeans), 1)
-print(f"Funzione Obiettivo Local Search 3 K-Means: {fo_ls3_kmeans}")
+fo_vlsn_kmeans = round(funzione_obiettivo(tracks_vlsn_kmeans), 1)
+print(f"Funzione Obiettivo Very Large Size Neighborhood Search K-Means: {fo_vlsn_kmeans}")
 
-#plot_all("Local Search 3 K-Means", tracks_ls3_kmeans, users, drivers, polo, map_size)
+#plot_all("Local Search 3 K-Means", tracks_vlsn_kmeans, users, drivers, polo, map_size)
 
 plot_2_2(users, drivers, polo, map_size, "LOCAL SEARCH 3", 
         tracks_row=[("Greedy 1 - FO: " + str(fo_greedy1), tracks_greedy1), ("K-Means 2 - FO: " + str(fo_kmeans2), tracks_kmeans2)], 
-        tracks_col=[("LS3 Greedy - FO: " + str(fo_ls3_greedy), tracks_ls3_greedy), ("LS3 K-Means - FO: " + str(fo_ls3_kmeans), tracks_ls3_kmeans)])
+        tracks_col=[("VLSN Greedy - FO: " + str(fo_vlsn_greedy), tracks_vlsn_greedy), ("VLSN K-Means - FO: " + str(fo_vlsn_kmeans), tracks_vlsn_kmeans)])
 
 # ------------------------- MULTI START LOCAL SEARCH ------------------------- 
 
@@ -254,8 +254,8 @@ fo_msls_kmeans = round(funzione_obiettivo(tracks_msls_kmeans), 1)
 print(f"Funzione Obiettivo Multi Start Local Search K-Means: {fo_msls_kmeans}")
 
 plot_2_2(users, drivers, polo, map_size, "MULTI START LOCAL SEARCH", 
-        tracks_row=[("MSLS LS3 Greedy Random - FO: " + str(fo_msls_greedy_random), tracks_msls_greedy_random), ("MSLS LS3 Greedy 1 - FO: " + str(fo_msls_greedy1), tracks_msls_greedy1)],
-        tracks_col=[("MSLS LS3 Greedy 2 - FO: " + str(fo_msls_greedy2), tracks_msls_greedy2), ("MSLS LS3 K-Means - FO: " + str(fo_msls_kmeans), tracks_msls_kmeans)])
+        tracks_row=[("MSLS VLSN Greedy Random - FO: " + str(fo_msls_greedy_random), tracks_msls_greedy_random), ("MSLS VLSN Greedy 1 - FO: " + str(fo_msls_greedy1), tracks_msls_greedy1)],
+        tracks_col=[("MSLS VLSN Greedy 2 - FO: " + str(fo_msls_greedy2), tracks_msls_greedy2), ("MSLS VLSN K-Means - FO: " + str(fo_msls_kmeans), tracks_msls_kmeans)])
 
 # ------------------------- GENETIC ALGORITHM ------------------------- 
 
@@ -310,6 +310,6 @@ plot_2_2(users, drivers, polo, map_size, "GENETIC ALGORITHM",
 # ------------------------- FINAL RESULTS -------------------------
 
 plot_of([("Greedy Random", fo_greedy_random), ("Greedy 1", fo_greedy1), ("Greedy 2", fo_greedy2), ("K-Means 1", fo_kmeans1), ("K-Means 2", fo_kmeans2),
-        ("LS1 Greedy", fo_ls1_greedy), ("LS1 K-Means", fo_ls1_kmeans), ("LS2 Greedy", fo_ls2_greedy), ("LS2 K-Means", fo_ls2_kmeans),
-        ("LS3 Greedy", fo_ls3_greedy), ("LS3 K-Means", fo_ls3_kmeans), ("MSLS Greedy", fo_msls_greedy1), ("MSLS K-Means", fo_msls_kmeans),
+        ("LS Greedy", fo_ls_greedy), ("LS K-Means", fo_ls_kmeans), ("VND Greedy", fo_vnd_greedy), ("VND K-Means", fo_vnd_kmeans),
+        ("VLSN Greedy", fo_vlsn_greedy), ("VLSN K-Means", fo_vlsn_kmeans), ("MSLS Greedy", fo_msls_greedy1), ("MSLS K-Means", fo_msls_kmeans),
         ("GA Greedy Random", fo_ga1_greedyrandom), ("GA Greedy 1", fo_ga1_greedy1), ("GA Greedy 2", fo_ga1_greedy2), ("GA K-Means", fo_ga1_kmeans)])

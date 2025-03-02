@@ -1,5 +1,5 @@
 from utils import funzione_obiettivo
-from ls.ls3 import ls3
+from ls.vlsn import vlsn
 
 def msls(users, drivers, polo, base, n):
 
@@ -11,13 +11,13 @@ def msls(users, drivers, polo, base, n):
 
         # Scegli da quale euristica costruttiva iniziare
         if base == "greedy1":
-            tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "greedy1")
+            tracks = vlsn(users.copy(), drivers.copy(), polo.copy(), "greedy1")
         elif base == "greedy2":
-            tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "greedy2")
+            tracks = vlsn(users.copy(), drivers.copy(), polo.copy(), "greedy2")
         elif base == "kmeans":
-            tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "kmeans")
+            tracks = vlsn(users.copy(), drivers.copy(), polo.copy(), "kmeans")
         elif base == "random":
-            tracks = ls3(users.copy(), drivers.copy(), polo.copy(), "random")
+            tracks = vlsn(users.copy(), drivers.copy(), polo.copy(), "random")
             
         # Se la soluzione trovata è migliore, aggiorna la migliore soluzione trovata finora
         if funzione_obiettivo(tracks) <= best_msls_fo:
