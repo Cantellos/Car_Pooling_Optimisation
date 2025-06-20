@@ -178,7 +178,7 @@ The algorithm runs for 100 generations, keeping the individual with the lowest c
 
 ### Genetic Algorithm Results
 
-![ResultGeneticAlgorithm]([link_to_be_added](https://github.com/OnestiFilippo/CarPooling/blob/main/screenshots/GA_ALL.png))
+![ResultGeneticAlgorithm](https://github.com/OnestiFilippo/CarPooling/blob/6fd47cee1e7a1264d447dd2d3be52ed929eb4e28/screenshots/GA_ALL.png)
 
 
 
