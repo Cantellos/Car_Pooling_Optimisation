@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project aims to optimize carpooling routes for individuals traveling to the Polo Scientifico Tecnologico UniFe. The goal is to minimize the total distance traveled by cars, considering that each car can carry up to 5 people (including the driver). The project explores various optimization algorithms to achieve this goal.
+This project aims to optimize car pooling routes for individuals traveling to the Polo Scientifico Tecnologico UniFe. The goal is to minimize the total distance traveled by cars, considering that each car can carry up to 5 people (including the driver). The project explores various optimization algorithms to achieve this goal.
 
 ## Problem Statement
 
