@@ -3,12 +3,12 @@ from greedy.greedy2 import greedy2
 from greedy.greedy_random import greedy_random
 from kmeans.kmeans1 import kmeans1
 from kmeans.kmeans2 import kmeans2
-from ls.ls import ls
-from ls.vnd import vnd
-from ls.vlsn import vlsn
-from ls.msls import msls
-from ga.ga1 import ga1
-from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_all, plot_of, plot_2_2_base
+from local_search.ls import ls
+from local_search.vnd import vnd
+from local_search.vlsn import vlsn
+from local_search.msls import msls
+from genetic.ga import ga1
+from utils import generatore, funzione_obiettivo, plot_2, plot_2_2, plot_of, plot_2_2_base
 
 # Scegli istanza su cui eseguire: 1 = Piccola, 2 = Media, 3 = Grande
 istanza = 2

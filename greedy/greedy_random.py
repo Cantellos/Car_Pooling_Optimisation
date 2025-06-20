@@ -1,4 +1,3 @@
-from utils import distanza
 import random
 
 def get_random(driver, users, polo):

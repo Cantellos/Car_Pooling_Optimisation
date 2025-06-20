@@ -1,5 +1,5 @@
 from utils import funzione_obiettivo
-from ls.vlsn import vlsn
+from local_search.vlsn import vlsn
 
 def msls(users, drivers, polo, base, n):
 
